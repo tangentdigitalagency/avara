@@ -7,4 +7,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   external: ["react", "react-dom"],
+  onSuccess: "node scripts/copy-assets.mjs",
 });

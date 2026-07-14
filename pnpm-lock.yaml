@@ -137,8 +137,8 @@ importers:
         version: 3.6.0
     devDependencies:
       '@eslint/js':
-        specifier: ^10.0.1
-        version: 10.0.1(eslint@9.39.5(jiti@2.7.0))
+        specifier: ^9.39.5
+        version: 9.39.5
       '@testing-library/jest-dom':
         specifier: ^6.9.1
         version: 6.9.1
