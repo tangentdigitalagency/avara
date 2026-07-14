@@ -46,12 +46,13 @@
     "tsup": "^8.3.0",
     "typescript": "^5.7.0",
     "typescript-eslint": "^8.63.0",
-    "vitest": "^2.1.9"
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@fontsource-variable/geist": "^5.2.9",
     "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.545.0",
     "motion": "^12.42.2",
     "tailwind-merge": "^3.6.0"
