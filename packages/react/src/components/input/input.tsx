@@ -1,18 +1,14 @@
 import * as React from "react";
+import type { SlotClassNames } from "../../lib/slot-class-names";
 import { Field } from "@base-ui/react/field";
 import { type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { inputVariants } from "./input.variants";
 import { cn } from "../../lib/cn";
 
-export interface InputClassNames {
-  base?: string;
-  label?: string;
-  inputWrapper?: string;
-  input?: string;
-  description?: string;
-  errorMessage?: string;
-}
+export type InputClassNames = SlotClassNames<
+  "base" | "label" | "inputWrapper" | "input" | "description" | "errorMessage"
+>;
 
 export interface InputProps
   extends

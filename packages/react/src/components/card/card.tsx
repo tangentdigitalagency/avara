@@ -1,14 +1,10 @@
 import * as React from "react";
+import type { SlotClassNames } from "../../lib/slot-class-names";
 import { type VariantProps } from "class-variance-authority";
 import { cardVariants, cardSectionVariants } from "./card.variants";
 import { cn } from "../../lib/cn";
 
-export interface CardClassNames {
-  base?: string;
-  header?: string;
-  body?: string;
-  footer?: string;
-}
+export type CardClassNames = SlotClassNames<"base" | "header" | "body" | "footer">;
 
 interface CardContextValue {
   size: NonNullable<VariantProps<typeof cardVariants>["size"]>;

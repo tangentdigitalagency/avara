@@ -2,7 +2,7 @@ import * as React from "react";
 import { motion, type HTMLMotionProps } from "motion/react";
 import { type VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
-import { spring } from "../../lib/motion-tokens";
+import { spring } from "@avara/motion";
 import { buttonVariants } from "./button.variants";
 import { cn } from "../../lib/cn";
 

@@ -50,6 +50,7 @@
     "vitest": "^4.1.10"
   },
   "dependencies": {
+    "@avara/motion": "workspace:*",
     "@base-ui/react": "^1.6.0",
     "@fontsource-variable/manrope": "^5.2.8",
     "class-variance-authority": "^0.7.1",

@@ -1,4 +1,5 @@
 import { cva } from "class-variance-authority";
+import { colorFocusRingClass } from "../../lib/color-focus-ring";
 
 export const cardVariants = cva(
   "flex flex-col transition-[box-shadow,transform,border-color,background-color] duration-200",
@@ -141,13 +142,11 @@ export const cardVariants = cva(
       },
       { variant: "ghost", color: "info", class: "bg-info-500/[0.03] dark:bg-info-500/[0.05]" },
 
-      { isPressable: true, color: "primary", class: "focus-visible:ring-primary-500" },
-      { isPressable: true, color: "secondary", class: "focus-visible:ring-secondary-500" },
-      { isPressable: true, color: "neutral", class: "focus-visible:ring-neutral-500" },
-      { isPressable: true, color: "success", class: "focus-visible:ring-success-500" },
-      { isPressable: true, color: "warning", class: "focus-visible:ring-warning-500" },
-      { isPressable: true, color: "danger", class: "focus-visible:ring-danger-500" },
-      { isPressable: true, color: "info", class: "focus-visible:ring-info-500" },
+      ...Object.entries(colorFocusRingClass).map(([color, ringClass]) => ({
+        isPressable: true as const,
+        color: color as keyof typeof colorFocusRingClass,
+        class: ringClass,
+      })),
     ],
     defaultVariants: {
       variant: "outline",

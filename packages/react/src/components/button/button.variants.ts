@@ -1,4 +1,5 @@
 import { cva } from "class-variance-authority";
+import { colorFocusRingClass } from "../../lib/color-focus-ring";
 
 export const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 font-extrabold [&_svg]:shrink-0 transition-[background-color,border-color,color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 aria-disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed",
@@ -188,13 +189,10 @@ export const buttonVariants = cva(
       },
 
       // Focus visible ring
-      { color: "primary", class: "focus-visible:ring-primary-500" },
-      { color: "secondary", class: "focus-visible:ring-secondary-500" },
-      { color: "neutral", class: "focus-visible:ring-neutral-500" },
-      { color: "success", class: "focus-visible:ring-success-500" },
-      { color: "warning", class: "focus-visible:ring-warning-500" },
-      { color: "danger", class: "focus-visible:ring-danger-500" },
-      { color: "info", class: "focus-visible:ring-info-500" },
+      ...Object.entries(colorFocusRingClass).map(([color, ringClass]) => ({
+        color: color as keyof typeof colorFocusRingClass,
+        class: ringClass,
+      })),
     ],
     defaultVariants: {
       variant: "solid",
