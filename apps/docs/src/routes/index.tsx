@@ -1,152 +1,56 @@
-import { useEffect, useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import { Plus, ArrowRight, Download, Trash2, Heart, Settings } from 'lucide-react'
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { ArrowUpRight } from 'lucide-react'
 
-import { Button } from '@avara/react'
+import { PageHeader } from '../components/PageHeader'
+import { PageShell } from '../components/PageShell'
+import { useTheme } from '../hooks/use-theme'
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute('/')({ component: Library })
 
-type Theme = 'light' | 'dark'
+const components = [
+  {
+    name: 'Button',
+    description: 'Actions, CTAs, and interactive controls across variants, colors, and sizes.',
+    to: '/button' as const,
+  },
+  {
+    name: 'Input',
+    description: 'Text fields with labels, validation, adornments, and clearable states.',
+    to: '/input' as const,
+  },
+]
 
-const variants = ['solid', 'outline', 'soft', 'ghost'] as const
-const colors = ['primary', 'secondary', 'neutral', 'success', 'warning', 'danger', 'info'] as const
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
-const radii = ['sm', 'md', 'lg', 'full'] as const
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="mb-10">
-      <h2 className="text-xs font-bold uppercase tracking-wide text-muted mb-3">{title}</h2>
-      {children}
-    </div>
-  )
-}
-
-function Home() {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof document === 'undefined') return 'light'
-    return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-  })
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-  }, [theme])
+function Library() {
+  const { theme, setTheme } = useTheme()
 
   return (
-    <div className="min-h-dvh bg-background text-foreground p-8">
-      <div className="mb-10 flex items-center gap-3">
-        <span className="text-sm text-muted">Theme</span>
-        <div className="flex gap-2">
-          <Button size="sm" variant={theme === 'light' ? 'solid' : 'outline'} color="neutral" onClick={() => setTheme('light')}>
-            Light
-          </Button>
-          <Button size="sm" variant={theme === 'dark' ? 'solid' : 'outline'} color="neutral" onClick={() => setTheme('dark')}>
-            Dark
-          </Button>
-        </div>
-      </div>
+    <PageShell>
+      <PageHeader
+        title="Component library"
+        description="Visual playground for every Avara component — flip themes, poke variants, catch the bugs."
+        theme={theme}
+        onThemeChange={setTheme}
+        showBack={false}
+      />
 
-      <Section title="Variant × color matrix">
-        <div className="flex flex-col gap-3">
-          {variants.map((variant) => (
-            <div key={variant} className="flex gap-3 items-center flex-wrap">
-              <span className="text-xs text-muted w-16 shrink-0">{variant}</span>
-              {colors.map((color) => (
-                <Button key={color} variant={variant} color={color}>
-                  {color}
-                </Button>
-              ))}
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Sizes">
-        <div className="flex gap-3 items-center flex-wrap">
-          {sizes.map((size) => (
-            <Button key={size} size={size}>
-              {size.toUpperCase()}
-            </Button>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Radius">
-        <div className="flex gap-3 items-center flex-wrap">
-          {radii.map((radius) => (
-            <Button key={radius} radius={radius}>
-              {radius}
-            </Button>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Shadow (hover to see lift + shadow grow)">
-        <div className="flex gap-3 items-center flex-wrap">
-          <Button shadow="none">None</Button>
-          <Button shadow="sm">SM</Button>
-          <Button shadow="md">MD</Button>
-          <Button shadow="lg">LG</Button>
-        </div>
-      </Section>
-
-      <Section title="Focus ring (tab through these — ring should match each color)">
-        <div className="flex gap-3 items-center flex-wrap">
-          {colors.map((color) => (
-            <Button key={color} color={color}>
-              {color}
-            </Button>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Icons — startContent / endContent (auto-sized, no manual className)">
-        <div className="flex gap-3 items-center flex-wrap">
-          <Button startContent={<Plus />}>Add item</Button>
-          <Button endContent={<ArrowRight />}>Continue</Button>
-          <Button variant="outline" startContent={<Download />}>Download</Button>
-          <Button variant="soft" color="danger" startContent={<Trash2 />}>Delete</Button>
-        </div>
-      </Section>
-
-      <Section title="Icon auto-scaling across sizes">
-        <div className="flex gap-3 items-center flex-wrap">
-          {sizes.map((size) => (
-            <Button key={size} size={size} startContent={<Heart />}>
-              {size.toUpperCase()}
-            </Button>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="States">
-        <div className="flex gap-3 items-center flex-wrap">
-          <Button isLoading>Loading</Button>
-          <Button isDisabled>Disabled</Button>
-          <Button isDisabled startContent={<Plus />}>Disabled with icon</Button>
-          <Button isLoading startContent={<Plus />}>Loading with icon</Button>
-        </div>
-      </Section>
-
-      <Section title="Full width">
-        <div className="flex flex-col gap-3">
-          <Button fullWidth>Full width</Button>
-          <Button fullWidth variant="outline" color="secondary" endContent={<ArrowRight />}>
-            Full width with icon
-          </Button>
-        </div>
-      </Section>
-
-      <Section title="Icon only — across sizes and variants">
-        <div className="flex gap-3 items-center flex-wrap">
-          {sizes.map((size) => (
-            <Button key={size} size={size} isIconOnly aria-label="Add item" startContent={<Plus />} />
-          ))}
-          <Button variant="outline" color="danger" isIconOnly aria-label="Delete item" startContent={<Trash2 />} />
-          <Button variant="soft" color="neutral" isIconOnly aria-label="Settings" startContent={<Settings />} />
-          <Button isLoading isIconOnly aria-label="Loading" />
-        </div>
-      </Section>
-    </div>
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {components.map((component) => (
+          <li key={component.to}>
+            <Link
+              to={component.to}
+              className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary-500 hover:shadow-md"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <span className="text-lg font-extrabold transition-colors group-hover:text-primary-700 dark:group-hover:text-primary-400">
+                  {component.name}
+                </span>
+                <ArrowUpRight className="size-4 shrink-0 text-muted transition-colors group-hover:text-primary-600" />
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{component.description}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </PageShell>
   )
 }
