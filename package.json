@@ -1,0 +1,29 @@
+{
+  "name": "avara",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Avara — a coherent React engineering ecosystem.",
+  "license": "MIT",
+  "packageManager": "pnpm@11.13.0",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.0",
+    "prettier": "^3.4.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.7.0"
+  }
+}
