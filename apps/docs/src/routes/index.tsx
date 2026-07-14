@@ -18,6 +18,11 @@ const components = [
     description: 'Text fields with labels, validation, adornments, and clearable states.',
     to: '/input' as const,
   },
+  {
+    name: 'Card',
+    description: 'Composable surfaces with headers, bodies, footers, and press/hover states.',
+    to: '/card' as const,
+  },
 ]
 
 function Library() {

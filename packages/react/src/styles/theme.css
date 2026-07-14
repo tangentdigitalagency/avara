@@ -77,25 +77,33 @@
 
   /* Success — shifted to emerald so it stays distinct from lime primary */
   --color-success-100: oklch(0.93 0.05 165);
+  --color-success-200: oklch(0.85 0.08 165);
   --color-success-500: oklch(0.55 0.14 165);
   --color-success-600: oklch(0.47 0.13 165);
   --color-success-700: oklch(0.39 0.11 165);
+  --color-success-800: oklch(0.32 0.09 165);
 
   /* Warning — shifted to golden amber so it stays distinct from orange secondary */
   --color-warning-100: oklch(0.94 0.05 85);
+  --color-warning-200: oklch(0.88 0.09 85);
   --color-warning-500: oklch(0.78 0.16 85);
   --color-warning-600: oklch(0.68 0.16 83);
   --color-warning-700: oklch(0.57 0.14 81);
+  --color-warning-800: oklch(0.46 0.12 79);
 
   --color-danger-100: oklch(0.93 0.06 25);
+  --color-danger-200: oklch(0.85 0.11 25);
   --color-danger-500: oklch(0.6 0.21 25);
   --color-danger-600: oklch(0.52 0.2 25);
   --color-danger-700: oklch(0.44 0.18 25);
+  --color-danger-800: oklch(0.36 0.15 25);
 
   --color-info-100: oklch(0.93 0.04 240);
+  --color-info-200: oklch(0.85 0.07 240);
   --color-info-500: oklch(0.62 0.15 240);
   --color-info-600: oklch(0.54 0.15 240);
   --color-info-700: oklch(0.46 0.14 240);
+  --color-info-800: oklch(0.38 0.12 240);
 
   /* Radius — bumped up for the bubbly, chunky direction */
   --radius-sm: 8px;

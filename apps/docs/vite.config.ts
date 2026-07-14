@@ -16,6 +16,9 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
+  optimizeDeps: {
+  exclude: ["@avara/react"],
+},
 })
 
 export default config
