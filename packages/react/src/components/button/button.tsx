@@ -2,7 +2,8 @@ import * as React from "react";
 import { motion, type HTMLMotionProps } from "motion/react";
 import { type VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
-import { spring } from "@avara/motion";
+import { spring, usePrefersReducedMotion } from "@avara/motion";
+
 import { buttonVariants } from "./button.variants";
 import { cn } from "../../lib/cn";
 
@@ -53,13 +54,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
     }
 
+    const prefersReducedMotion = usePrefersReducedMotion();
+
     return (
       <motion.button
         ref={ref}
         type="button"
         aria-disabled={disabled || undefined}
         data-loading={isLoading || undefined}
-        whileTap={disabled ? undefined : { scale: 0.96, y: 1 }}
+        whileTap={disabled || prefersReducedMotion ? undefined : { scale: 0.96, y: 1 }}
         transition={spring.snappy}
         onClick={(event) => {
           if (disabled) {

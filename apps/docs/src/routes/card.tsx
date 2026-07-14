@@ -17,7 +17,7 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['none', 'sm', 'md', 'lg', 'xl'] as const
 
 function CardPage() {
-  const { theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme } = useTheme()
   const [pressCount, setPressCount] = useState(0)
 
   return (
@@ -25,8 +25,10 @@ function CardPage() {
       <PageHeader
         title="Card"
         description="Composable surface — variants, density, press/hover behavior, and header actions."
-        theme={theme}
-        onThemeChange={setTheme}
+        mode={mode}
+        onModeChange={setMode}
+        themeVariant={theme}
+        onThemeVariantChange={setTheme}
       />
 
       <Section title="Variant × color" description="Every variant against every semantic color.">

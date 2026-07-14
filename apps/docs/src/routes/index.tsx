@@ -23,18 +23,25 @@ const components = [
     description: 'Composable surfaces with headers, bodies, footers, and press/hover states.',
     to: '/card' as const,
   },
+  {
+    name: 'Modal',
+    description: 'Dialog overlays with sizes, backdrops, placement, and dismiss behavior.',
+    to: '/modal' as const,
+  },
 ]
 
 function Library() {
-  const { theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme } = useTheme()
 
   return (
     <PageShell>
       <PageHeader
         title="Component library"
         description="Visual playground for every Avara component — flip themes, poke variants, catch the bugs."
-        theme={theme}
-        onThemeChange={setTheme}
+        mode={mode}
+        onModeChange={setMode}
+        themeVariant={theme}
+        onThemeVariantChange={setTheme}
         showBack={false}
       />
 

@@ -9,3 +9,7 @@ export type { InputProps, InputClassNames } from "./components/input/input";
 // Card
 export { Card } from "./components/card/card";
 export type { CardProps, CardClassNames } from "./components/card/card";
+
+// Modal
+export { Modal } from "./components/modal/modal";
+export type { ModalProps, ModalClassNames } from "./components/modal/modal";

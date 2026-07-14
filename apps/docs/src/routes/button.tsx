@@ -16,15 +16,17 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['sm', 'md', 'lg', 'full'] as const
 
 function ButtonPage() {
-  const { theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme } = useTheme()
 
   return (
     <PageShell>
       <PageHeader
         title="Button"
         description="Action control — variants, colors, sizes, icons, and loading states."
-        theme={theme}
-        onThemeChange={setTheme}
+        mode={mode}
+        onModeChange={setMode}
+        themeVariant={theme}
+        onThemeVariantChange={setTheme}
       />
 
       <Section title="Variant × color" description="Every variant against every semantic color.">

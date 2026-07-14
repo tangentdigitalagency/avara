@@ -1,19 +1,23 @@
 import { Link } from '@tanstack/react-router'
 import { Sun, Moon } from 'lucide-react'
 import { Button } from '@avara/react'
-import type { Theme } from '../hooks/use-theme'
+import type { Mode, Theme } from '../hooks/use-theme'
 
 export function PageHeader({
   title,
   description,
-  theme,
-  onThemeChange,
+  mode,
+  onModeChange,
+  themeVariant,
+  onThemeVariantChange,
   showBack = true,
 }: {
   title: string
   description?: string
-  theme: Theme
-  onThemeChange: (theme: Theme) => void
+  mode: Mode
+  onModeChange: (mode: Mode) => void
+  themeVariant: Theme
+  onThemeVariantChange: (theme: Theme) => void
   showBack?: boolean
 }) {
   return (
@@ -35,31 +39,58 @@ export function PageHeader({
         {description ? <p className="mt-2 max-w-xl text-muted">{description}</p> : null}
       </div>
 
-      <div
-        className="flex shrink-0 gap-1 rounded-full border border-border bg-surface/80 p-1 shadow-sm backdrop-blur"
-        role="group"
-        aria-label="Color theme"
-      >
-        <Button
-          size="sm"
-          radius="full"
-          variant={theme === 'light' ? 'soft' : 'ghost'}
-          color="neutral"
-          isIconOnly
-          aria-label="Light mode"
-          onClick={() => onThemeChange('light')}
-          startContent={<Sun />}
-        />
-        <Button
-          size="sm"
-          radius="full"
-          variant={theme === 'dark' ? 'soft' : 'ghost'}
-          color="neutral"
-          isIconOnly
-          aria-label="Dark mode"
-          onClick={() => onThemeChange('dark')}
-          startContent={<Moon />}
-        />
+      <div className="flex shrink-0 flex-wrap items-center gap-2">
+        <div
+          className="flex gap-1 rounded-full border border-border bg-surface/80 p-1 shadow-sm backdrop-blur"
+          role="group"
+          aria-label="Color mode"
+        >
+          <Button
+            size="sm"
+            radius="full"
+            variant={mode === 'light' ? 'soft' : 'ghost'}
+            color="neutral"
+            isIconOnly
+            aria-label="Light mode"
+            onClick={() => onModeChange('light')}
+            startContent={<Sun />}
+          />
+          <Button
+            size="sm"
+            radius="full"
+            variant={mode === 'dark' ? 'soft' : 'ghost'}
+            color="neutral"
+            isIconOnly
+            aria-label="Dark mode"
+            onClick={() => onModeChange('dark')}
+            startContent={<Moon />}
+          />
+        </div>
+
+        <div
+          className="flex gap-1 rounded-full border border-border bg-surface/80 p-1 shadow-sm backdrop-blur"
+          role="group"
+          aria-label="Design theme"
+        >
+          <Button
+            size="sm"
+            radius="full"
+            variant={themeVariant === 'bold' ? 'soft' : 'ghost'}
+            color="neutral"
+            onClick={() => onThemeVariantChange('bold')}
+          >
+            Bold
+          </Button>
+          <Button
+            size="sm"
+            radius="full"
+            variant={themeVariant === 'premium' ? 'soft' : 'ghost'}
+            color="neutral"
+            onClick={() => onThemeVariantChange('premium')}
+          >
+            Premium
+          </Button>
+        </div>
       </div>
     </header>
   )
