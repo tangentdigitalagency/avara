@@ -9,3 +9,7 @@ export const ease = {
   in: [0.4, 0, 1, 1],
   out: [0, 0, 0.2, 1],
 } as const;
+
+export const spring = {
+  snappy: { type: "spring", stiffness: 500, damping: 30, mass: 0.5 },
+} as const;
