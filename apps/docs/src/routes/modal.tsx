@@ -18,7 +18,7 @@ const backdrops = ['transparent', 'opaque', 'blur'] as const
 const placements = ['center', 'top'] as const
 
 function ModalPage() {
-  const { mode, setMode, theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
   const [openKey, setOpenKey] = useState<string | null>(null)
 
   const open = (key: string) => setOpenKey(key)
@@ -26,14 +26,16 @@ function ModalPage() {
   const is = (key: string) => openKey === key
 
   return (
-    <PageShell>
+    <PageShell glassDemo>
       <PageHeader
         title="Modal"
-        description="Dialog overlay — sizes, radius, backdrop, placement, dismiss rules, and composed forms."
+        description="Dialog overlay — sizes, radius, backdrop, placement, dismiss rules, and composed forms. Use Premium + Glass to test translucency."
         mode={mode}
         onModeChange={setMode}
         themeVariant={theme}
         onThemeVariantChange={setTheme}
+        glass={glass}
+        onGlassChange={setGlass}
       />
 
       <Section title="Sizes">
@@ -140,7 +142,7 @@ function ModalPage() {
         <Modal
           key={`animation-${animation}`}
           isOpen={is(`animation-${animation}`)}
-          onOpenChange={(next) => !next && close()}
+          onOpenChange={(next: boolean) => !next && close()}
           animation={animation}
         >
           <Modal.Header>
@@ -161,7 +163,7 @@ function ModalPage() {
         <Modal
           key={`size-${size}`}
           isOpen={is(`size-${size}`)}
-          onOpenChange={(next) => !next && close()}
+          onOpenChange={(next: boolean) => !next && close()}
           size={size}
         >
           <Modal.Header>
@@ -185,7 +187,7 @@ function ModalPage() {
         <Modal
           key={`radius-${radius}`}
           isOpen={is(`radius-${radius}`)}
-          onOpenChange={(next) => !next && close()}
+          onOpenChange={(next: boolean) => !next && close()}
           radius={radius}
         >
           <Modal.Header>
@@ -205,7 +207,7 @@ function ModalPage() {
         <Modal
           key={`backdrop-${backdrop}`}
           isOpen={is(`backdrop-${backdrop}`)}
-          onOpenChange={(next) => !next && close()}
+          onOpenChange={(next: boolean) => !next && close()}
           backdrop={backdrop}
         >
           <Modal.Header>
@@ -226,7 +228,7 @@ function ModalPage() {
         <Modal
           key={`placement-${placement}`}
           isOpen={is(`placement-${placement}`)}
-          onOpenChange={(next) => !next && close()}
+          onOpenChange={(next: boolean) => !next && close()}
           placement={placement}
         >
           <Modal.Header>
@@ -248,7 +250,7 @@ function ModalPage() {
 
       <Modal
         isOpen={is('not-dismissable')}
-        onOpenChange={(next) => !next && close()}
+        onOpenChange={(next: boolean) => !next && close()}
         isDismissable={false}
       >
         <Modal.Header>
@@ -265,7 +267,7 @@ function ModalPage() {
 
       <Modal
         isOpen={is('no-keyboard')}
-        onOpenChange={(next) => !next && close()}
+        onOpenChange={(next: boolean) => !next && close()}
         isKeyboardDismissDisabled
       >
         <Modal.Header>
@@ -282,7 +284,7 @@ function ModalPage() {
 
       <Modal
         isOpen={is('no-close-button')}
-        onOpenChange={(next) => !next && close()}
+        onOpenChange={(next: boolean) => !next && close()}
         showCloseButton={false}
       >
         <Modal.Header>
@@ -299,7 +301,7 @@ function ModalPage() {
 
       <Modal
         isOpen={is('scroll-inside')}
-        onOpenChange={(next) => !next && close()}
+        onOpenChange={(next: boolean) => !next && close()}
         scrollBehavior="inside"
         size="lg"
       >
@@ -310,7 +312,7 @@ function ModalPage() {
         <Modal.Body>
           <div className="flex flex-col gap-3">
             {Array.from({ length: 24 }, (_, i) => (
-              <p key={i} className="text-sm text-muted">
+              <p key={i} className="text-sm ">
                 Paragraph {i + 1} — long content to force an internal scroll region.
               </p>
             ))}
@@ -326,7 +328,7 @@ function ModalPage() {
 
       <Modal
         isOpen={is('confirm-delete')}
-        onOpenChange={(next) => !next && close()}
+        onOpenChange={(next: boolean) => !next && close()}
         size="sm"
       >
         <Modal.Header>

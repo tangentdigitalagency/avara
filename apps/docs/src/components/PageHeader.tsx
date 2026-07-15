@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { Sun, Moon } from 'lucide-react'
 import { Button } from '@avara/react'
-import type { Mode, Theme } from '../hooks/use-theme'
+import type { Glass, Mode, Theme } from '../hooks/use-theme'
 
 export function PageHeader({
   title,
@@ -10,6 +10,8 @@ export function PageHeader({
   onModeChange,
   themeVariant,
   onThemeVariantChange,
+  glass,
+  onGlassChange,
   showBack = true,
 }: {
   title: string
@@ -18,6 +20,8 @@ export function PageHeader({
   onModeChange: (mode: Mode) => void
   themeVariant: Theme
   onThemeVariantChange: (theme: Theme) => void
+  glass: Glass
+  onGlassChange: (glass: Glass) => void
   showBack?: boolean
 }) {
   return (
@@ -89,6 +93,40 @@ export function PageHeader({
             onClick={() => onThemeVariantChange('premium')}
           >
             Premium
+          </Button>
+        </div>
+
+        <div
+          className="flex gap-1 rounded-full border border-border bg-surface/80 p-1 shadow-sm backdrop-blur"
+          role="group"
+          aria-label="Glass intensity"
+        >
+          <Button
+            size="sm"
+            radius="full"
+            variant={glass === 'off' ? 'soft' : 'ghost'}
+            color="neutral"
+            onClick={() => onGlassChange('off')}
+          >
+            Off
+          </Button>
+          <Button
+            size="sm"
+            radius="full"
+            variant={glass === 'regular' ? 'soft' : 'ghost'}
+            color="neutral"
+            onClick={() => onGlassChange('regular')}
+          >
+            Regular
+          </Button>
+          <Button
+            size="sm"
+            radius="full"
+            variant={glass === 'clear' ? 'soft' : 'ghost'}
+            color="neutral"
+            onClick={() => onGlassChange('clear')}
+          >
+            Clear
           </Button>
         </div>
       </div>

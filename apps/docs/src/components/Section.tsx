@@ -16,7 +16,9 @@ export function Section({
         </h2>
         {description ? <p className="mt-1.5 pl-3.5 text-sm text-muted">{description}</p> : null}
       </div>
-      <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-6">{children}</div>
+      <div className="rounded-2xl border border-border bg-surface p-5 text-foreground shadow-sm sm:p-6">
+        {children}
+      </div>
     </section>
   )
 }

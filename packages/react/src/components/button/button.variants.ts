@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { colorFocusRingClass } from "../../lib/color-focus-ring";
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 font-extrabold [&_svg]:shrink-0 transition-[background-color,border-color,color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 aria-disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed",
+  "inline-flex items-center justify-center gap-2 font-extrabold [&_svg]:shrink-0 transition-[background-color,border-color,color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 aria-disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed backdrop-blur-(--glass-blur) backdrop-saturate-(--glass-saturate)",
   {
     variants: {
       variant: {

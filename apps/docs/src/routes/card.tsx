@@ -17,18 +17,20 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['none', 'sm', 'md', 'lg', 'xl'] as const
 
 function CardPage() {
-  const { mode, setMode, theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
   const [pressCount, setPressCount] = useState(0)
 
   return (
-    <PageShell>
+    <PageShell glassDemo>
       <PageHeader
         title="Card"
-        description="Composable surface — variants, density, press/hover behavior, and header actions."
+        description="Composable surface — variants, density, press/hover behavior, and header actions. Use Premium + Glass to test translucency."
         mode={mode}
         onModeChange={setMode}
         themeVariant={theme}
         onThemeVariantChange={setTheme}
+        glass={glass}
+        onGlassChange={setGlass}
       />
 
       <Section title="Variant × color" description="Every variant against every semantic color.">

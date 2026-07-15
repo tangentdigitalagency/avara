@@ -76,3 +76,20 @@ export function usePrefersReducedMotion(): boolean {
 
   return prefersReduced;
 }
+
+export function usePrefersReducedTransparency(): boolean {
+  const [prefersReduced, setPrefersReduced] = useState(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return false;
+    return window.matchMedia("(prefers-reduced-transparency: reduce)").matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    const query = window.matchMedia("(prefers-reduced-transparency: reduce)");
+    const handleChange = (event: MediaQueryListEvent) => setPrefersReduced(event.matches);
+    query.addEventListener("change", handleChange);
+    return () => query.removeEventListener("change", handleChange);
+  }, []);
+
+  return prefersReduced;
+}

@@ -17,11 +17,11 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['sm', 'md', 'lg', 'full'] as const
 
 function InputPage() {
-  const { mode, setMode, theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
   const [clearableValue, setClearableValue] = useState('Try clearing me')
 
   return (
-    <PageShell>
+    <PageShell glassDemo>
       <PageHeader
         title="Input"
         description="Text fields with labels, validation, adornments, and clearable states."
@@ -29,6 +29,8 @@ function InputPage() {
         onModeChange={setMode}
         themeVariant={theme}
         onThemeVariantChange={setTheme}
+        glass={glass}
+        onGlassChange={setGlass}
       />
 
       <Section title="Variant × color" description="Every variant against every semantic color.">

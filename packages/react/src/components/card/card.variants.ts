@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { colorFocusRingClass } from "../../lib/color-focus-ring";
 
 export const cardVariants = cva(
-  "flex flex-col transition-[box-shadow,transform,border-color,background-color] duration-200",
+  "flex flex-col text-foreground transition-[box-shadow,transform,border-color,background-color] duration-200 backdrop-blur-(--glass-blur) backdrop-saturate-(--glass-saturate)",
   {
     variants: {
       variant: {

@@ -31,7 +31,7 @@ const components = [
 ]
 
 function Library() {
-  const { mode, setMode, theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
 
   return (
     <PageShell>
@@ -42,6 +42,8 @@ function Library() {
         onModeChange={setMode}
         themeVariant={theme}
         onThemeVariantChange={setTheme}
+        glass={glass}
+        onGlassChange={setGlass}
         showBack={false}
       />
 

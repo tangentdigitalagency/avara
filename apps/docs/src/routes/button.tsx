@@ -16,17 +16,19 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['sm', 'md', 'lg', 'full'] as const
 
 function ButtonPage() {
-  const { mode, setMode, theme, setTheme } = useTheme()
+  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
 
   return (
-    <PageShell>
+    <PageShell glassDemo="texture">
       <PageHeader
         title="Button"
-        description="Action control — variants, colors, sizes, icons, and loading states."
+        description="Action control — variants, colors, sizes, icons, and loading states. Texture backdrop is for fair Glass blur testing (try Premium + Glass)."
         mode={mode}
         onModeChange={setMode}
         themeVariant={theme}
         onThemeVariantChange={setTheme}
+        glass={glass}
+        onGlassChange={setGlass}
       />
 
       <Section title="Variant × color" description="Every variant against every semantic color.">

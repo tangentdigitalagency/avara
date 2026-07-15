@@ -27,7 +27,7 @@ export const modalViewportVariants = cva("fixed inset-0 flex justify-center over
 });
 
 export const modalPopupVariants = cva(
-  "relative w-full flex flex-col bg-surface border border-border shadow-lg outline-none",
+  "relative w-full flex flex-col bg-surface text-foreground border border-border shadow-lg outline-none relative w-full flex flex-col bg-surface border border-border shadow-lg outline-none backdrop-blur-(--glass-blur) backdrop-saturate-(--glass-saturate)",
   {
     variants: {
       size: {

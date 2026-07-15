@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const inputVariants = cva(
-  "flex w-full items-center gap-2 transition-[border-color,background-color,box-shadow] duration-200 has-disabled:opacity-50 has-disabled:pointer-events-none [&_input]:w-full [&_input]:bg-transparent [&_input]:outline-none [&_input]:placeholder:text-muted [&_svg]:shrink-0",
+  "flex w-full items-center gap-2 text-foreground transition-[border-color,background-color,box-shadow] duration-200 has-disabled:opacity-50 has-disabled:pointer-events-none [&_input]:w-full [&_input]:bg-transparent [&_input]:text-foreground [&_input]:outline-none [&_input]:placeholder:text-muted [&_svg]:shrink-0 backdrop-blur-(--glass-blur) backdrop-saturate-(--glass-saturate)",
   {
     variants: {
       variant: {

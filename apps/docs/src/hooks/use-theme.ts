@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 export type Mode = 'light' | 'dark'
 export type Theme = 'bold' | 'premium'
+export type Glass = 'off' | 'regular' | 'clear'
 
 function readMode(): Mode {
   if (typeof document === 'undefined') return 'light'
@@ -11,6 +12,12 @@ function readMode(): Mode {
 function readTheme(): Theme {
   if (typeof document === 'undefined') return 'bold'
   return document.documentElement.getAttribute('data-theme') === 'premium' ? 'premium' : 'bold'
+}
+
+function readGlass(): Glass {
+  if (typeof document === 'undefined') return 'off'
+  const value = document.documentElement.getAttribute('data-glass')
+  return value === 'regular' || value === 'clear' ? value : 'off'
 }
 
 function applyMode(next: Mode) {
@@ -25,9 +32,18 @@ function applyTheme(next: Theme) {
   }
 }
 
+function applyGlass(next: Glass) {
+  if (next === 'off') {
+    document.documentElement.removeAttribute('data-glass')
+  } else {
+    document.documentElement.setAttribute('data-glass', next)
+  }
+}
+
 export function useTheme() {
   const [mode, setModeState] = useState<Mode>(readMode)
   const [theme, setThemeState] = useState<Theme>(readTheme)
+  const [glass, setGlassState] = useState<Glass>(readGlass)
 
   const setMode = (next: Mode) => {
     setModeState(next)
@@ -39,5 +55,10 @@ export function useTheme() {
     applyTheme(next)
   }
 
-  return { mode, setMode, theme, setTheme }
+  const setGlass = (next: Glass) => {
+    setGlassState(next)
+    applyGlass(next)
+  }
+
+  return { mode, setMode, theme, setTheme, glass, setGlass }
 }

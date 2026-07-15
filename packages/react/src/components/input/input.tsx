@@ -79,7 +79,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <Field.Root
         invalid={isInvalid}
         disabled={isDisabled}
-        className={cn("flex flex-col gap-1.5", classNames?.base, className)}
+        className={cn("flex flex-col gap-1.5 text-foreground", classNames?.base, className)}
       >
         {label && (
           <Field.Label className={cn("text-sm font-semibold", classNames?.label)}>

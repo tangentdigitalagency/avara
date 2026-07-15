@@ -28,6 +28,7 @@
 }
 
 /* Premium theme — charcoal blue primary, Pumpkin Spice as its own distinct secondary */
+
 [data-theme="premium"] {
   --primary-500-raw: oklch(0.335 0.045 238);
   --primary-950-raw: oklch(0.97 0.01 238);
@@ -53,6 +54,37 @@
   --color-secondary-800: oklch(0.43 0.13 42);
   --color-secondary-900: oklch(0.34 0.1 40);
   --color-secondary-950: oklch(0.24 0.07 38);
+}
+
+/* Glass — independent layer, combines with any theme via data-glass + data-theme together */
+[data-glass="regular"] {
+  --glass-blur: 16px;
+  --glass-saturate: 160%;
+  --surface: rgb(255 255 255 / 0.65);
+  --border: rgb(255 255 255 / 0.3);
+  --shadow-lg-raw:
+    0 12px 24px -4px rgb(0 0 0 / 0.12), inset 0 2px 0 0 rgb(255 255 255 / 0.9),
+    inset 0 8px 16px -4px rgb(255 255 255 / 0.4), inset 0 0 0 1px rgb(255 255 255 / 0.3);
+}
+
+[data-glass="regular"].dark {
+  --surface: rgb(255 255 255 / 0.08);
+  --border: rgb(255 255 255 / 0.12);
+  --shadow-lg-raw:
+    0 16px 32px -4px rgb(0 0 0 / 0.6), inset 0 2px 0 0 rgb(255 255 255 / 0.5),
+    inset 0 8px 16px -4px rgb(255 255 255 / 0.15), inset 0 0 0 1px rgb(255 255 255 / 0.12);
+}
+
+[data-glass="clear"] {
+  --glass-blur: 8px;
+  --glass-saturate: 130%;
+  --surface: rgb(255 255 255 / 0.35);
+  --border: rgb(255 255 255 / 0.2);
+}
+
+[data-glass="clear"].dark {
+  --surface: rgb(255 255 255 / 0.04);
+  --border: rgb(255 255 255 / 0.08);
 }
 
 @theme {
