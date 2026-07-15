@@ -2,35 +2,22 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Plus, ArrowRight, Download, Trash2, Heart, Settings } from 'lucide-react'
 
 import { Button } from '@avara/react'
+import { DemoPage } from '../components/DemoPage'
 import { DemoRow, DemoStack } from '../components/DemoRow'
-import { PageHeader } from '../components/PageHeader'
-import { PageShell } from '../components/PageShell'
 import { Section } from '../components/Section'
-import { useTheme } from '../hooks/use-theme'
+import { colors, sizes, variants } from '../lib/demo'
 
 export const Route = createFileRoute('/button')({ component: ButtonPage })
 
-const variants = ['solid', 'outline', 'soft', 'ghost'] as const
-const colors = ['primary', 'secondary', 'neutral', 'success', 'warning', 'danger', 'info'] as const
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['sm', 'md', 'lg', 'full'] as const
 
 function ButtonPage() {
-  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
-
   return (
-    <PageShell glassDemo="texture">
-      <PageHeader
-        title="Button"
-        description="Action control — variants, colors, sizes, icons, and loading states. Texture backdrop is for fair Glass blur testing (try Premium + Glass)."
-        mode={mode}
-        onModeChange={setMode}
-        themeVariant={theme}
-        onThemeVariantChange={setTheme}
-        glass={glass}
-        onGlassChange={setGlass}
-      />
-
+    <DemoPage
+      title="Button"
+      description="Action control — variants, colors, sizes, icons, and loading states. Texture backdrop appears with Glass for blur testing."
+      glassDemo="texture"
+    >
       <Section title="Variant × color" description="Every variant against every semantic color.">
         <DemoStack>
           {variants.map((variant) => (
@@ -134,11 +121,23 @@ function ButtonPage() {
           {sizes.map((size) => (
             <Button key={size} size={size} isIconOnly aria-label="Add item" startContent={<Plus />} />
           ))}
-          <Button variant="outline" color="danger" isIconOnly aria-label="Delete item" startContent={<Trash2 />} />
-          <Button variant="soft" color="neutral" isIconOnly aria-label="Settings" startContent={<Settings />} />
+          <Button
+            variant="outline"
+            color="danger"
+            isIconOnly
+            aria-label="Delete item"
+            startContent={<Trash2 />}
+          />
+          <Button
+            variant="soft"
+            color="neutral"
+            isIconOnly
+            aria-label="Settings"
+            startContent={<Settings />}
+          />
           <Button isLoading isIconOnly aria-label="Loading" />
         </DemoRow>
       </Section>
-    </PageShell>
+    </DemoPage>
   )
 }

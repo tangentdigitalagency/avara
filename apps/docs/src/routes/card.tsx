@@ -3,41 +3,28 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Heart, Settings, MoreHorizontal, ArrowRight } from 'lucide-react'
 
 import { Card, Button } from '@avara/react'
-import { DemoGrid, DemoStack } from '../components/DemoRow'
-import { PageHeader } from '../components/PageHeader'
-import { PageShell } from '../components/PageShell'
+import { DemoPage } from '../components/DemoPage'
+import { DemoGrid, DemoStack, VariantLabel } from '../components/DemoRow'
 import { Section } from '../components/Section'
-import { useTheme } from '../hooks/use-theme'
+import { colors, sizes, variants } from '../lib/demo'
 
 export const Route = createFileRoute('/card')({ component: CardPage })
 
-const variants = ['outline', 'solid', 'soft', 'ghost'] as const
-const colors = ['primary', 'secondary', 'neutral', 'success', 'warning', 'danger', 'info'] as const
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['none', 'sm', 'md', 'lg', 'xl'] as const
 
 function CardPage() {
-  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
   const [pressCount, setPressCount] = useState(0)
 
   return (
-    <PageShell glassDemo>
-      <PageHeader
-        title="Card"
-        description="Composable surface — variants, density, press/hover behavior, and header actions. Use Premium + Glass to test translucency."
-        mode={mode}
-        onModeChange={setMode}
-        themeVariant={theme}
-        onThemeVariantChange={setTheme}
-        glass={glass}
-        onGlassChange={setGlass}
-      />
-
+    <DemoPage
+      title="Card"
+      description="Composable surface — variants, density, press/hover behavior, and header actions. Turn on Glass (try Premium) to test translucency."
+    >
       <Section title="Variant × color" description="Every variant against every semantic color.">
         <DemoStack>
           {variants.map((variant) => (
             <div key={variant} className="flex flex-col gap-3">
-              <span className="text-xs font-semibold uppercase tracking-wide text-muted">{variant}</span>
+              <VariantLabel>{variant}</VariantLabel>
               <DemoGrid>
                 {colors.map((color) => (
                   <Card key={color} variant={variant} color={color}>
@@ -74,7 +61,7 @@ function CardPage() {
       </Section>
 
       <Section title="Radius">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        <DemoGrid>
           {radii.map((radius) => (
             <Card key={radius} radius={radius}>
               <Card.Body>
@@ -82,11 +69,11 @@ function CardPage() {
               </Card.Body>
             </Card>
           ))}
-        </div>
+        </DemoGrid>
       </Section>
 
       <Section title="Shadow">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <DemoGrid>
           {(['none', 'sm', 'md', 'lg'] as const).map((shadow) => (
             <Card key={shadow} shadow={shadow}>
               <Card.Body>
@@ -94,7 +81,7 @@ function CardPage() {
               </Card.Body>
             </Card>
           ))}
-        </div>
+        </DemoGrid>
       </Section>
 
       <Section
@@ -123,12 +110,7 @@ function CardPage() {
       </Section>
 
       <Section title="Disabled pressable">
-        <Card
-          isPressable
-          isDisabled
-          shadow="sm"
-          onClick={() => setPressCount((n) => n + 1)}
-        >
+        <Card isPressable isDisabled shadow="sm" onClick={() => setPressCount((n) => n + 1)}>
           <Card.Body>
             <Card.Title>Disabled pressable card</Card.Title>
             <p className="mt-1 text-sm text-muted">Should not fire onClick, should look dimmed.</p>
@@ -182,7 +164,10 @@ function CardPage() {
         </DemoStack>
       </Section>
 
-      <Section title="Composed examples" description="Realistic layouts — metric, activity feed, and pressable product.">
+      <Section
+        title="Composed examples"
+        description="Realistic layouts — upgrade CTA, metric, activity, product."
+      >
         <DemoStack>
           <Card shadow="md" className="max-w-sm">
             <Card.Header>
@@ -211,7 +196,9 @@ function CardPage() {
               <Card.Body>
                 <Card.Description>Revenue</Card.Description>
                 <p className="mt-1 text-3xl font-extrabold">$12,480</p>
-                <p className="mt-1 text-xs text-success-600 dark:text-success-500">+8.2% this month</p>
+                <p className="mt-1 text-xs text-success-600 dark:text-success-500">
+                  +8.2% this month
+                </p>
               </Card.Body>
             </Card>
 
@@ -231,12 +218,7 @@ function CardPage() {
               </Card.Body>
             </Card>
 
-            <Card
-              isPressable
-              isHoverable
-              shadow="sm"
-              onClick={() => alert('Product clicked')}
-            >
+            <Card isPressable isHoverable shadow="sm" onClick={() => alert('Product clicked')}>
               <Card.Body>
                 <div className="mb-3 aspect-video rounded-md bg-neutral-500/10" />
                 <Card.Title>Wireless Headphones</Card.Title>
@@ -247,7 +229,10 @@ function CardPage() {
         </DemoStack>
       </Section>
 
-      <Section title="classNames override" description="Slot-level class overrides for base/header/body/footer.">
+      <Section
+        title="classNames override"
+        description="Slot-level class overrides for base/header/body/footer."
+      >
         <Card
           shadow="sm"
           classNames={{
@@ -268,6 +253,6 @@ function CardPage() {
           </Card.Footer>
         </Card>
       </Section>
-    </PageShell>
+    </DemoPage>
   )
 }

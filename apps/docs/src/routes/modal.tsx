@@ -2,12 +2,11 @@ import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Trash2 } from 'lucide-react'
 
-import { Modal, Button, Input } from '@avara/react'
+import { Modal, Button, Input  } from '@avara/react'
+import type {ModalProps} from '@avara/react';
+import { DemoPage } from '../components/DemoPage'
 import { DemoRow } from '../components/DemoRow'
-import { PageHeader } from '../components/PageHeader'
-import { PageShell } from '../components/PageShell'
 import { Section } from '../components/Section'
-import { useTheme } from '../hooks/use-theme'
 
 export const Route = createFileRoute('/modal')({ component: ModalPage })
 
@@ -15,29 +14,53 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'full'] as const
 const animations = ['fade', 'scale', 'slideUp', 'slideDown', 'slideLeft', 'slideRight'] as const
 const radii = ['sm', 'md', 'lg', 'xl'] as const
 const backdrops = ['transparent', 'opaque', 'blur'] as const
-const placements = ['center', 'top'] as const
+const placements = ['center', 'top', 'auto'] as const
+
+function DemoModal({
+  id,
+  openKey,
+  onClose,
+  title,
+  description,
+  children,
+  footer,
+  ...props
+}: {
+  id: string
+  openKey: string | null
+  onClose: () => void
+  title: string
+  description?: string
+  children?: React.ReactNode
+  footer?: React.ReactNode
+} & Omit<ModalProps, 'isOpen' | 'onOpenChange' | 'children'>) {
+  return (
+    <Modal isOpen={openKey === id} onOpenChange={(open) => !open && onClose()} {...props}>
+      <Modal.Header>
+        <Modal.Title>{title}</Modal.Title>
+        {description ? <Modal.Description>{description}</Modal.Description> : null}
+      </Modal.Header>
+      {children != null ? <Modal.Body>{children}</Modal.Body> : null}
+      {footer != null ? <Modal.Footer>{footer}</Modal.Footer> : null}
+    </Modal>
+  )
+}
 
 function ModalPage() {
-  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
   const [openKey, setOpenKey] = useState<string | null>(null)
 
   const open = (key: string) => setOpenKey(key)
   const close = () => setOpenKey(null)
-  const is = (key: string) => openKey === key
+
+  const done = (
+    <Button onClick={close}>Done</Button>
+  )
 
   return (
-    <PageShell glassDemo>
-      <PageHeader
-        title="Modal"
-        description="Dialog overlay — sizes, radius, backdrop, placement, dismiss rules, and composed forms. Use Premium + Glass to test translucency."
-        mode={mode}
-        onModeChange={setMode}
-        themeVariant={theme}
-        onThemeVariantChange={setTheme}
-        glass={glass}
-        onGlassChange={setGlass}
-      />
-
+    <DemoPage
+      title="Modal"
+      description="Dialog overlay — sizes, animations, backdrop, placement, dismiss rules, and composed forms. Turn on Glass (try Premium) to test translucency."
+    >
       <Section title="Sizes">
         <DemoRow>
           {sizes.map((size) => (
@@ -81,19 +104,13 @@ function ModalPage() {
         </DemoRow>
       </Section>
 
-      <Section
-        title="Placement"
-        description="Resize your browser narrow to test the mobile sheet."
-      >
+      <Section title="Placement" description="Resize your browser narrow to test the mobile sheet.">
         <DemoRow>
           {placements.map((placement) => (
             <Button key={placement} size="sm" onClick={() => open(`placement-${placement}`)}>
-              {placement}
+              {placement === 'auto' ? 'auto (try mobile width)' : placement}
             </Button>
           ))}
-          <Button size="sm" onClick={() => open('placement-auto')}>
-            auto (default — try mobile width)
-          </Button>
         </DemoRow>
       </Section>
 
@@ -124,7 +141,7 @@ function ModalPage() {
         </DemoRow>
       </Section>
 
-      <Section title="Composed example" description="Form + footer actions.">
+      <Section title="Composed example" description="Form + footer actions (Button + Input).">
         <DemoRow>
           <Button
             color="danger"
@@ -137,218 +154,174 @@ function ModalPage() {
         </DemoRow>
       </Section>
 
-      {/* Animation modals */}
       {animations.map((animation) => (
-        <Modal
-          key={`animation-${animation}`}
-          isOpen={is(`animation-${animation}`)}
-          onOpenChange={(next: boolean) => !next && close()}
+        <DemoModal
+          key={animation}
+          id={`animation-${animation}`}
+          openKey={openKey}
+          onClose={close}
+          title={`Animation: ${animation}`}
+          description="Watch both the entrance and the exit closely."
           animation={animation}
         >
-          <Modal.Header>
-            <Modal.Title>Animation: {animation}</Modal.Title>
-            <Modal.Description>Watch both the entrance and the exit closely.</Modal.Description>
-          </Modal.Header>
-          <Modal.Body>
-            <p className="text-sm">
-              Close this with the × button, Escape, and a backdrop click — the exit animation should
-              play identically every time.
-            </p>
-          </Modal.Body>
-        </Modal>
+          <p className="text-sm">
+            Close with ×, Escape, and backdrop click — exit should play identically every time.
+          </p>
+        </DemoModal>
       ))}
 
-      {/* Size modals */}
       {sizes.map((size) => (
-        <Modal
-          key={`size-${size}`}
-          isOpen={is(`size-${size}`)}
-          onOpenChange={(next: boolean) => !next && close()}
+        <DemoModal
+          key={size}
+          id={`size-${size}`}
+          openKey={openKey}
+          onClose={close}
+          title={`Size: ${size}`}
+          description={`max-width for the ${size} size token.`}
           size={size}
+          footer={
+            <>
+              <Button variant="ghost" color="neutral" onClick={close}>
+                Close
+              </Button>
+              <Button onClick={close}>Confirm</Button>
+            </>
+          }
         >
-          <Modal.Header>
-            <Modal.Title>Size: {size}</Modal.Title>
-            <Modal.Description>max-width for the {size} size token.</Modal.Description>
-          </Modal.Header>
-          <Modal.Body>
-            <p className="text-sm">Body content for the {size} modal.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="ghost" color="neutral" onClick={close}>
-              Close
-            </Button>
-            <Button onClick={close}>Confirm</Button>
-          </Modal.Footer>
-        </Modal>
+          <p className="text-sm">Body content for the {size} modal.</p>
+        </DemoModal>
       ))}
 
-      {/* Radius modals */}
       {radii.map((radius) => (
-        <Modal
-          key={`radius-${radius}`}
-          isOpen={is(`radius-${radius}`)}
-          onOpenChange={(next: boolean) => !next && close()}
+        <DemoModal
+          key={radius}
+          id={`radius-${radius}`}
+          openKey={openKey}
+          onClose={close}
+          title={`Radius: ${radius}`}
           radius={radius}
+          footer={done}
         >
-          <Modal.Header>
-            <Modal.Title>Radius: {radius}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p className="text-sm">Popup corners use radius={radius}.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={close}>Done</Button>
-          </Modal.Footer>
-        </Modal>
+          <p className="text-sm">Popup corners use radius={radius}.</p>
+        </DemoModal>
       ))}
 
-      {/* Backdrop modals */}
       {backdrops.map((backdrop) => (
-        <Modal
-          key={`backdrop-${backdrop}`}
-          isOpen={is(`backdrop-${backdrop}`)}
-          onOpenChange={(next: boolean) => !next && close()}
+        <DemoModal
+          key={backdrop}
+          id={`backdrop-${backdrop}`}
+          openKey={openKey}
+          onClose={close}
+          title={`Backdrop: ${backdrop}`}
+          description="Click outside to dismiss (opaque/blur should be easy to see)."
           backdrop={backdrop}
+          footer={done}
         >
-          <Modal.Header>
-            <Modal.Title>Backdrop: {backdrop}</Modal.Title>
-            <Modal.Description>Click outside to dismiss (opaque/blur should be easy to see).</Modal.Description>
-          </Modal.Header>
-          <Modal.Body>
-            <p className="text-sm">Scrim style is {backdrop}.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={close}>Done</Button>
-          </Modal.Footer>
-        </Modal>
+          <p className="text-sm">Scrim style is {backdrop}.</p>
+        </DemoModal>
       ))}
 
-      {/* Placement modals */}
-      {([...placements, 'auto'] as const).map((placement) => (
-        <Modal
-          key={`placement-${placement}`}
-          isOpen={is(`placement-${placement}`)}
-          onOpenChange={(next: boolean) => !next && close()}
+      {placements.map((placement) => (
+        <DemoModal
+          key={placement}
+          id={`placement-${placement}`}
+          openKey={openKey}
+          onClose={close}
+          title={`Placement: ${placement}`}
+          description={
+            placement === 'auto'
+              ? 'Bottom sheet on mobile, centered on sm+.'
+              : `Pinned toward ${placement}.`
+          }
           placement={placement}
+          footer={done}
         >
-          <Modal.Header>
-            <Modal.Title>Placement: {placement}</Modal.Title>
-            <Modal.Description>
-              {placement === 'auto'
-                ? 'Bottom sheet on mobile, centered on sm+.'
-                : `Pinned toward ${placement}.`}
-            </Modal.Description>
-          </Modal.Header>
-          <Modal.Body>
-            <p className="text-sm">Try a narrow viewport for the auto sheet behavior.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={close}>Done</Button>
-          </Modal.Footer>
-        </Modal>
+          <p className="text-sm">Try a narrow viewport for the auto sheet behavior.</p>
+        </DemoModal>
       ))}
 
-      <Modal
-        isOpen={is('not-dismissable')}
-        onOpenChange={(next: boolean) => !next && close()}
+      <DemoModal
+        id="not-dismissable"
+        openKey={openKey}
+        onClose={close}
+        title="Not dismissable"
+        description="Outside click should not close this modal."
         isDismissable={false}
+        footer={<Button onClick={close}>Close</Button>}
       >
-        <Modal.Header>
-          <Modal.Title>Not dismissable</Modal.Title>
-          <Modal.Description>Outside click should not close this modal.</Modal.Description>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="text-sm">Use the close button or the action below.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={close}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+        <p className="text-sm">Use the close button or the action below.</p>
+      </DemoModal>
 
-      <Modal
-        isOpen={is('no-keyboard')}
-        onOpenChange={(next: boolean) => !next && close()}
+      <DemoModal
+        id="no-keyboard"
+        openKey={openKey}
+        onClose={close}
+        title="Keyboard dismiss disabled"
+        description="Escape should not close this modal."
         isKeyboardDismissDisabled
+        footer={<Button onClick={close}>Close</Button>}
       >
-        <Modal.Header>
-          <Modal.Title>Keyboard dismiss disabled</Modal.Title>
-          <Modal.Description>Escape should not close this modal.</Modal.Description>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="text-sm">Outside click still works; Escape does not.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={close}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+        <p className="text-sm">Outside click still works; Escape does not.</p>
+      </DemoModal>
 
-      <Modal
-        isOpen={is('no-close-button')}
-        onOpenChange={(next: boolean) => !next && close()}
+      <DemoModal
+        id="no-close-button"
+        openKey={openKey}
+        onClose={close}
+        title="No close button"
+        description="Corner X is hidden — dismiss via outside click or action."
         showCloseButton={false}
+        footer={<Button onClick={close}>Close</Button>}
       >
-        <Modal.Header>
-          <Modal.Title>No close button</Modal.Title>
-          <Modal.Description>Corner X is hidden — dismiss via outside click or action.</Modal.Description>
-        </Modal.Header>
-        <Modal.Body>
-          <p className="text-sm">showCloseButton is false.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={close}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+        <p className="text-sm">showCloseButton is false.</p>
+      </DemoModal>
 
-      <Modal
-        isOpen={is('scroll-inside')}
-        onOpenChange={(next: boolean) => !next && close()}
+      <DemoModal
+        id="scroll-inside"
+        openKey={openKey}
+        onClose={close}
+        title="Scroll inside"
+        description="Header and footer stay put while the body scrolls."
         scrollBehavior="inside"
         size="lg"
+        footer={
+          <>
+            <Button variant="ghost" color="neutral" onClick={close}>
+              Cancel
+            </Button>
+            <Button onClick={close}>Got it</Button>
+          </>
+        }
       >
-        <Modal.Header>
-          <Modal.Title>Scroll inside</Modal.Title>
-          <Modal.Description>Header and footer stay put while the body scrolls.</Modal.Description>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="flex flex-col gap-3">
-            {Array.from({ length: 24 }, (_, i) => (
-              <p key={i} className="text-sm ">
-                Paragraph {i + 1} — long content to force an internal scroll region.
-              </p>
-            ))}
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="ghost" color="neutral" onClick={close}>
-            Cancel
-          </Button>
-          <Button onClick={close}>Got it</Button>
-        </Modal.Footer>
-      </Modal>
+        <div className="flex flex-col gap-3">
+          {Array.from({ length: 24 }, (_, i) => (
+            <p key={i} className="text-sm text-muted">
+              Paragraph {i + 1} — long content to force an internal scroll region.
+            </p>
+          ))}
+        </div>
+      </DemoModal>
 
-      <Modal
-        isOpen={is('confirm-delete')}
-        onOpenChange={(next: boolean) => !next && close()}
+      <DemoModal
+        id="confirm-delete"
+        openKey={openKey}
+        onClose={close}
+        title="Delete account"
+        description="This action cannot be undone. Type DELETE to confirm."
         size="sm"
+        footer={
+          <>
+            <Button variant="ghost" color="neutral" onClick={close}>
+              Cancel
+            </Button>
+            <Button color="danger" startContent={<Trash2 />} onClick={close}>
+              Delete
+            </Button>
+          </>
+        }
       >
-        <Modal.Header>
-          <Modal.Title>Delete account</Modal.Title>
-          <Modal.Description>
-            This action cannot be undone. Type DELETE to confirm.
-          </Modal.Description>
-        </Modal.Header>
-        <Modal.Body>
-          <Input label="Confirmation" placeholder="DELETE" />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="ghost" color="neutral" onClick={close}>
-            Cancel
-          </Button>
-          <Button color="danger" startContent={<Trash2 />} onClick={close}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </PageShell>
+        <Input label="Confirmation" placeholder="DELETE" />
+      </DemoModal>
+    </DemoPage>
   )
 }

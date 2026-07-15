@@ -13,3 +13,7 @@ export type { CardProps, CardClassNames } from "./components/card/card";
 // Modal
 export { Modal } from "./components/modal/modal";
 export type { ModalProps, ModalClassNames } from "./components/modal/modal";
+
+// Toast
+export { toast, Toaster } from "./components/toast/toast";
+export type { ToasterProps, ToastColor, ToastClassNames } from "./components/toast/toast";

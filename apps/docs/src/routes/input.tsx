@@ -3,41 +3,28 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Mail, Search, Lock } from 'lucide-react'
 
 import { Input } from '@avara/react'
-import { DemoGrid, DemoRow, DemoStack } from '../components/DemoRow'
-import { PageHeader } from '../components/PageHeader'
-import { PageShell } from '../components/PageShell'
+import { DemoPage } from '../components/DemoPage'
+import { DemoGrid, DemoRow, DemoStack, VariantLabel } from '../components/DemoRow'
 import { Section } from '../components/Section'
-import { useTheme } from '../hooks/use-theme'
+import { colors, inputVariants, sizes } from '../lib/demo'
 
 export const Route = createFileRoute('/input')({ component: InputPage })
 
-const variants = ['outline', 'soft', 'solid', 'ghost'] as const
-const colors = ['primary', 'secondary', 'neutral', 'success', 'warning', 'danger', 'info'] as const
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const radii = ['sm', 'md', 'lg', 'full'] as const
 
 function InputPage() {
-  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
   const [clearableValue, setClearableValue] = useState('Try clearing me')
 
   return (
-    <PageShell glassDemo>
-      <PageHeader
-        title="Input"
-        description="Text fields with labels, validation, adornments, and clearable states."
-        mode={mode}
-        onModeChange={setMode}
-        themeVariant={theme}
-        onThemeVariantChange={setTheme}
-        glass={glass}
-        onGlassChange={setGlass}
-      />
-
+    <DemoPage
+      title="Input"
+      description="Text fields with labels, validation, adornments, and clearable states."
+    >
       <Section title="Variant × color" description="Every variant against every semantic color.">
         <DemoStack>
-          {variants.map((variant) => (
+          {inputVariants.map((variant) => (
             <div key={variant} className="flex flex-col gap-3">
-              <span className="text-xs font-semibold uppercase tracking-wide text-muted">{variant}</span>
+              <VariantLabel>{variant}</VariantLabel>
               <DemoGrid>
                 {colors.map((color) => (
                   <Input
@@ -131,6 +118,6 @@ function InputPage() {
           ))}
         </DemoGrid>
       </Section>
-    </PageShell>
+    </DemoPage>
   )
 }

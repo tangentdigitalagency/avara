@@ -1,9 +1,9 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { ArrowUpRight } from 'lucide-react'
 
-import { PageHeader } from '../components/PageHeader'
-import { PageShell } from '../components/PageShell'
-import { useTheme } from '../hooks/use-theme'
+import { Card } from '@avara/react'
+import { DemoPage } from '../components/DemoPage'
+import { DemoGrid } from '../components/DemoRow'
 
 export const Route = createFileRoute('/')({ component: Library })
 
@@ -28,43 +28,38 @@ const components = [
     description: 'Dialog overlays with sizes, backdrops, placement, and dismiss behavior.',
     to: '/modal' as const,
   },
+  {
+    name: 'Toast',
+    description: 'Transient notifications with colors, actions, durations, and promises.',
+    to: '/toast' as const,
+  },
 ]
 
 function Library() {
-  const { mode, setMode, theme, setTheme, glass, setGlass } = useTheme()
-
   return (
-    <PageShell>
-      <PageHeader
-        title="Component library"
-        description="Visual playground for every Avara component — flip themes, poke variants, catch the bugs."
-        mode={mode}
-        onModeChange={setMode}
-        themeVariant={theme}
-        onThemeVariantChange={setTheme}
-        glass={glass}
-        onGlassChange={setGlass}
-        showBack={false}
-      />
-
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <DemoPage
+      title="Component library"
+      description="Visual playground for every Avara component — flip themes, poke variants, catch the bugs."
+      glassDemo="gradient"
+      showBack={false}
+    >
+      <DemoGrid>
         {components.map((component) => (
-          <li key={component.to}>
-            <Link
-              to={component.to}
-              className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-primary-500 hover:shadow-md"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <span className="text-lg font-extrabold transition-colors group-hover:text-primary-700 dark:group-hover:text-primary-400">
+          <Link key={component.to} to={component.to} className="group block h-full outline-none">
+            <Card isHoverable shadow="sm" className="h-full transition-[border-color] duration-200 group-hover:border-primary-500 group-focus-visible:border-primary-500">
+              <Card.Header>
+                <Card.Title className="group-hover:text-primary-700 dark:group-hover:text-primary-400">
                   {component.name}
-                </span>
-                <ArrowUpRight className="size-4 shrink-0 text-muted transition-colors group-hover:text-primary-600" />
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{component.description}</p>
-            </Link>
-          </li>
+                </Card.Title>
+                <Card.Description>{component.description}</Card.Description>
+                <Card.Action>
+                  <ArrowUpRight className="size-4 text-muted transition-colors group-hover:text-primary-600" />
+                </Card.Action>
+              </Card.Header>
+            </Card>
+          </Link>
         ))}
-      </ul>
-    </PageShell>
+      </DemoGrid>
+    </DemoPage>
   )
 }
