@@ -34,3 +34,11 @@ export type {
   RadioGroupProps,
   RadioGroupClassNames,
 } from "./components/radio/radio";
+
+// Select
+export { Select } from "./components/select/select";
+export type {
+  SelectProps,
+  SelectClassNames,
+  SelectItemOption,
+} from "./components/select/select";

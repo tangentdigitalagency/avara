@@ -48,6 +48,11 @@ const components = [
     description: 'Single-choice groups with orientation, motion, validation, and item overrides.',
     to: '/radio' as const,
   },
+  {
+    name: 'Select',
+    description: 'Single and multi select menus with clearable, placement, and validation.',
+    to: '/select' as const,
+  },
 ]
 
 function Library() {
