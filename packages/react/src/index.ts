@@ -25,3 +25,12 @@ export type { CheckboxProps, CheckboxClassNames } from "./components/checkbox/ch
 // Switch
 export { Switch } from "./components/switch/switch";
 export type { SwitchProps, SwitchClassNames } from "./components/switch/switch";
+
+// Radio
+export { Radio, RadioGroup } from "./components/radio/radio";
+export type {
+  RadioProps,
+  RadioClassNames,
+  RadioGroupProps,
+  RadioGroupClassNames,
+} from "./components/radio/radio";

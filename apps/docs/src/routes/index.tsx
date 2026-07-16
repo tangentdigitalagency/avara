@@ -43,6 +43,11 @@ const components = [
     description: 'On/off toggles with thumb icons, track content, validation, and loading.',
     to: '/switch' as const,
   },
+  {
+    name: 'Radio',
+    description: 'Single-choice groups with orientation, motion, validation, and item overrides.',
+    to: '/radio' as const,
+  },
 ]
 
 function Library() {
