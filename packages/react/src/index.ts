@@ -17,3 +17,7 @@ export type { ModalProps, ModalClassNames } from "./components/modal/modal";
 // Toast
 export { toast, Toaster } from "./components/toast/toast";
 export type { ToasterProps, ToastColor, ToastClassNames } from "./components/toast/toast";
+
+// Checkbox
+export { Checkbox } from "./components/checkbox/checkbox";
+export type { CheckboxProps, CheckboxClassNames } from "./components/checkbox/checkbox";

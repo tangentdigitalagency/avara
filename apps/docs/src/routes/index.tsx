@@ -33,6 +33,11 @@ const components = [
     description: 'Transient notifications with colors, actions, durations, and promises.',
     to: '/toast' as const,
   },
+  {
+    name: 'Checkbox',
+    description: 'Binary and indeterminate selection with labels, validation, and loading.',
+    to: '/checkbox' as const,
+  },
 ]
 
 function Library() {
