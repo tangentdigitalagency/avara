@@ -1,24 +1,20 @@
 import * as React from "react";
 import type { SlotClassNames } from "../../lib/slot-class-names";
 import { Field } from "@base-ui/react/field";
-import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
+import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import { type VariantProps } from "class-variance-authority";
-import { Minus, Loader2 } from "lucide-react";
-import {
-  checkboxVariants,
-  checkboxIndicatorVariants,
-  checkboxWaveVariants,
-} from "./checkbox.variants";
+import { Loader2 } from "lucide-react";
+import { switchVariants, switchThumbVariants } from "./switch.variants";
 import { cn } from "../../lib/cn";
 
-export type CheckboxClassNames = SlotClassNames<
-  "base" | "row" | "box" | "indicator" | "label" | "description" | "errorMessage"
+export type SwitchClassNames = SlotClassNames<
+  "base" | "row" | "track" | "thumb" | "label" | "description" | "errorMessage"
 >;
 
-export interface CheckboxProps
+export interface SwitchProps
   extends
-    Omit<React.ComponentProps<typeof CheckboxPrimitive.Root>, "className" | "render" | "children">,
-    VariantProps<typeof checkboxVariants> {
+    Omit<React.ComponentProps<typeof SwitchPrimitive.Root>, "className" | "render" | "children">,
+    VariantProps<typeof switchVariants> {
   label?: string;
   description?: string;
   errorMessage?: string;
@@ -26,32 +22,15 @@ export interface CheckboxProps
   isRequired?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
-  isIndeterminate?: boolean;
   isLoading?: boolean;
+  thumbIcon?: React.ReactNode | ((checked: boolean) => React.ReactNode);
+  startContent?: React.ReactNode;
+  endContent?: React.ReactNode;
   className?: string;
-  classNames?: CheckboxClassNames;
+  classNames?: SwitchClassNames;
 }
 
-function DrawnCheckIcon({ delayMs }: { delayMs: number }) {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path
-        d="M2.5 8.5 6 12l7.5-9"
-        style={{ transitionDelay: `${delayMs}ms` }}
-        className="[stroke-dasharray:20] [stroke-dashoffset:20] transition-[stroke-dashoffset] duration-300 ease-(--ease-spring) group-data-checked/indicator:[stroke-dashoffset:0] motion-reduce:transition-none"
-      />
-    </svg>
-  );
-}
-
-export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
+export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
   (
     {
       className,
@@ -59,8 +38,6 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
       variant,
       color,
       size,
-      radius,
-      motion = "pop",
       label,
       description,
       errorMessage,
@@ -68,8 +45,10 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
       isRequired = false,
       isDisabled = false,
       isReadOnly = false,
-      isIndeterminate = false,
       isLoading = false,
+      thumbIcon,
+      startContent,
+      endContent,
       id,
       checked,
       defaultChecked,
@@ -78,7 +57,8 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
     },
     ref,
   ) => {
-    const drawDelay = motion === "stagger" ? 300 : motion === "wave" ? 150 : 60;
+    const resolvedThumbIcon =
+      typeof thumbIcon === "function" ? thumbIcon(checked ?? defaultChecked ?? false) : thumbIcon;
 
     return (
       <Field.Root
@@ -86,8 +66,8 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
         disabled={isDisabled}
         className={cn("flex flex-col gap-1", classNames?.base, className)}
       >
-        <div className={cn("flex items-start gap-2", classNames?.row)}>
-          <CheckboxPrimitive.Root
+        <div className={cn("flex items-center gap-2", classNames?.row)}>
+          <SwitchPrimitive.Root
             ref={ref}
             id={id}
             nativeButton
@@ -95,31 +75,35 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
             checked={checked}
             defaultChecked={defaultChecked}
             onCheckedChange={onCheckedChange}
-            indeterminate={isIndeterminate}
             disabled={isDisabled}
             readOnly={isReadOnly || isLoading}
             required={isRequired}
             aria-busy={isLoading || undefined}
             className={cn(
-              checkboxVariants({ variant, color, size, radius, isInvalid, isLoading, motion }),
-              classNames?.box,
+              "group",
+              switchVariants({ variant, color, size, isInvalid, isLoading }),
+              classNames?.track,
             )}
             {...props}
           >
-            {motion === "wave" && <span className={checkboxWaveVariants()} aria-hidden="true" />}
-            <CheckboxPrimitive.Indicator
-              keepMounted
-              className={cn(checkboxIndicatorVariants({ isLoading }), classNames?.indicator)}
-            >
+            {startContent && (
+              <span className="pointer-events-none absolute left-1 flex items-center justify-center text-current opacity-100 transition-opacity duration-200 group-data-checked:opacity-30 [&_svg]:size-3">
+                {startContent}
+              </span>
+            )}
+            <SwitchPrimitive.Thumb className={cn(switchThumbVariants({ size }), classNames?.thumb)}>
               {isLoading ? (
                 <Loader2 className="animate-spin" aria-hidden="true" />
-              ) : isIndeterminate ? (
-                <Minus aria-hidden="true" />
               ) : (
-                <DrawnCheckIcon delayMs={drawDelay} />
+                resolvedThumbIcon
               )}
-            </CheckboxPrimitive.Indicator>
-          </CheckboxPrimitive.Root>
+            </SwitchPrimitive.Thumb>
+            {endContent && (
+              <span className="pointer-events-none absolute right-1 flex items-center justify-center text-current opacity-30 transition-opacity duration-200 group-data-checked:opacity-100 [&_svg]:size-3">
+                {endContent}
+              </span>
+            )}
+          </SwitchPrimitive.Root>
 
           {label && (
             <Field.Label
@@ -152,4 +136,4 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
   },
 );
 
-Checkbox.displayName = "Checkbox";
+Switch.displayName = "Switch";

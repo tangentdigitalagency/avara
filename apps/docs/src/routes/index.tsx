@@ -38,6 +38,11 @@ const components = [
     description: 'Binary and indeterminate selection with labels, validation, and loading.',
     to: '/checkbox' as const,
   },
+  {
+    name: 'Switch',
+    description: 'On/off toggles with thumb icons, track content, validation, and loading.',
+    to: '/switch' as const,
+  },
 ]
 
 function Library() {

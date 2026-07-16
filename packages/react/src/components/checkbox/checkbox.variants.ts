@@ -43,7 +43,7 @@ export const checkboxVariants = cva(
         false: "",
       },
       motion: {
-        pop: "data-checked:[animation:checkbox-pop_0.35s_var(--ease-spring)]",
+        pop: "data-checked:[animation:checkbox-pop_0.35s_var(--ease-spring)] motion-reduce:data-checked:[animation:none]",
         wave: "",
         stagger: "",
       },
@@ -240,11 +240,12 @@ export const checkboxVariants = cva(
 );
 
 export const checkboxWaveVariants = cva(
-  "absolute inset-0 scale-0 rounded-[inherit] bg-current transition-transform duration-300 ease-(--ease-spring) data-checked:scale-100",
+  "absolute inset-0 scale-0 rounded-[inherit] bg-current transition-transform duration-300 ease-(--ease-spring) motion-reduce:transition-none data-checked:scale-100",
 );
 
 export const checkboxIndicatorVariants = cva(
-  "group/indicator relative flex items-center justify-center text-current [&_svg]:size-full opacity-0 scale-50 transition-[opacity,transform] duration-300 ease-(--ease-spring) data-checked:opacity-100 data-checked:scale-100 data-indeterminate:opacity-100 data-indeterminate:scale-100 data-[starting-style]:opacity-0 data-[starting-style]:scale-50 data-[ending-style]:opacity-0 data-[ending-style]:scale-50",
+  "group/indicator relative flex items-center justify-center text-current [&_svg]:size-full opacity-0 scale-50 transition-[opacity,transform] duration-300 ease-(--ease-spring) motion-reduce:transition-none data-checked:opacity-100 data-checked:scale-100 data-indeterminate:opacity-100 data-indeterminate:scale-100 data-[starting-style]:opacity-0 data-[starting-style]:scale-50 data-[ending-style]:opacity-0 data-[ending-style]:scale-50",
+
   {
     variants: {
       isLoading: {

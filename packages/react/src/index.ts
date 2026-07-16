@@ -21,3 +21,7 @@ export type { ToasterProps, ToastColor, ToastClassNames } from "./components/toa
 // Checkbox
 export { Checkbox } from "./components/checkbox/checkbox";
 export type { CheckboxProps, CheckboxClassNames } from "./components/checkbox/checkbox";
+
+// Switch
+export { Switch } from "./components/switch/switch";
+export type { SwitchProps, SwitchClassNames } from "./components/switch/switch";
