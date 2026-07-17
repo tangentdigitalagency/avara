@@ -169,7 +169,7 @@ function CardPage() {
         description="Realistic layouts — upgrade CTA, metric, activity, product."
       >
         <DemoStack>
-          <Card shadow="md" className="max-w-sm">
+          <Card shadow="md" className="w-full max-w-sm">
             <Card.Header>
               <Card.Title>Upgrade to Pro</Card.Title>
               <Card.Description>Unlock every component and priority support.</Card.Description>
@@ -191,7 +191,7 @@ function CardPage() {
             </Card.Footer>
           </Card>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card shadow="sm">
               <Card.Body>
                 <Card.Description>Revenue</Card.Description>

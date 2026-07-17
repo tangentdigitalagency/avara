@@ -83,13 +83,17 @@ function RadioPage() {
       </Section>
 
       <Section title="Orientation">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <RadioGroup label="Vertical (default)" defaultValue="email">
             <Radio value="email" label="Email" description="Classic inbox notifications." />
             <Radio value="sms" label="SMS" description="Text messages to your phone." />
             <Radio value="push" label="Push" description="In-app alerts only." />
           </RadioGroup>
-          <RadioGroup label="Horizontal" orientation="horizontal" defaultValue="email">
+          <RadioGroup
+            label="Horizontal (wraps on narrow screens)"
+            orientation="horizontal"
+            defaultValue="email"
+          >
             <Radio value="email" label="Email" />
             <Radio value="sms" label="SMS" />
             <Radio value="push" label="Push" />

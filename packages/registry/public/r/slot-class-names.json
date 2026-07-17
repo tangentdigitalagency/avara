@@ -1,0 +1,13 @@
+{
+  "name": "slot-class-names",
+  "type": "registry:lib",
+  "title": "SlotClassNames type",
+  "description": "Generic TypeScript type for multi-slot classNames props.",
+  "files": [
+    {
+      "path": "packages/react/src/lib/slot-class-names.ts",
+      "type": "registry:lib",
+      "content": "export type SlotClassNames<T extends string> = Partial<Record<T, string>>;\n"
+    }
+  ]
+}

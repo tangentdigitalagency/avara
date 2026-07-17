@@ -6,23 +6,25 @@ export function DemoRow({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3">
       {label ? (
-        <span className="w-20 shrink-0 text-xs font-semibold uppercase tracking-wide text-muted">
+        <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-muted sm:w-20">
           {label}
         </span>
       ) : null}
-      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-3">{children}</div>
+      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2 sm:gap-3">{children}</div>
     </div>
   )
 }
 
 export function DemoStack({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-col gap-4">{children}</div>
+  return <div className="flex flex-col gap-3 sm:gap-4">{children}</div>
 }
 
 export function DemoGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">{children}</div>
+  return (
+    <div className="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3">{children}</div>
+  )
 }
 
 export function VariantLabel({ children }: { children: React.ReactNode }) {

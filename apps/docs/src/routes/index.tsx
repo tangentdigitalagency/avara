@@ -65,13 +65,23 @@ function Library() {
     >
       <DemoGrid>
         {components.map((component) => (
-          <Link key={component.to} to={component.to} className="group block h-full outline-none">
-            <Card isHoverable shadow="sm" className="h-full transition-[border-color] duration-200 group-hover:border-primary-500 group-focus-visible:border-primary-500">
+          <Link
+            key={component.to}
+            to={component.to}
+            className="group block h-full rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+          >
+            <Card
+              isHoverable
+              shadow="sm"
+              className="h-full transition-[border-color] duration-200 group-hover:border-primary-500 group-focus-visible:border-primary-500"
+            >
               <Card.Header>
-                <Card.Title className="group-hover:text-primary-700 dark:group-hover:text-primary-400">
+                <Card.Title className="text-base group-hover:text-primary-700 sm:text-lg dark:group-hover:text-primary-400">
                   {component.name}
                 </Card.Title>
-                <Card.Description>{component.description}</Card.Description>
+                <Card.Description className="text-sm leading-relaxed">
+                  {component.description}
+                </Card.Description>
                 <Card.Action>
                   <ArrowUpRight className="size-4 text-muted transition-colors group-hover:text-primary-600" />
                 </Card.Action>

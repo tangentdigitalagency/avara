@@ -109,7 +109,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.ComponentPropsWithoutR
         ref={ref}
         data-slot="card-header"
         className={cn(
-          "grid auto-rows-min grid-cols-[1fr] gap-1 has-[[data-slot=card-action]]:grid-cols-[1fr_auto]",
+          "grid auto-rows-min grid-cols-[1fr] gap-1 has-data-[slot=card-action]:grid-cols-[1fr_auto]",
           cardSectionVariants({ size }),
           classNames?.header,
           className,

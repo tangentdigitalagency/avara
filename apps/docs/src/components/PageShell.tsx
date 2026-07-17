@@ -18,7 +18,7 @@ export function PageShell({
   return (
     <div
       className={[
-        'relative min-h-dvh text-foreground',
+        'relative min-h-dvh overflow-x-clip text-foreground',
         isTexture ? 'bg-cover bg-center' : isGradient ? glassDemoAtmosphere : 'bg-background',
       ].join(' ')}
       style={isTexture ? { backgroundImage: `url('${glassDemoTextureUrl}')` } : undefined}
@@ -26,10 +26,12 @@ export function PageShell({
       {!glassDemo ? (
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(ellipse_80%_60%_at_20%_-10%,color-mix(in_oklab,var(--color-primary-500)_22%,transparent),transparent),radial-gradient(ellipse_60%_50%_at_90%_0%,color-mix(in_oklab,var(--color-secondary-500)_14%,transparent),transparent)]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(ellipse_80%_60%_at_20%_-10%,color-mix(in_oklab,var(--color-primary-500)_22%,transparent),transparent),radial-gradient(ellipse_60%_50%_at_90%_0%,color-mix(in_oklab,var(--color-secondary-500)_14%,transparent),transparent)] sm:h-72"
         />
       ) : null}
-      <div className="relative mx-auto max-w-5xl px-6 py-10 sm:px-8 sm:py-14">{children}</div>
+      <div className="relative mx-auto w-full max-w-5xl px-4 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[max(2rem,env(safe-area-inset-top))] sm:px-8 sm:py-14">
+        {children}
+      </div>
     </div>
   )
 }

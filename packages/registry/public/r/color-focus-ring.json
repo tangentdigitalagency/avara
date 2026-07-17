@@ -1,0 +1,13 @@
+{
+  "name": "color-focus-ring",
+  "type": "registry:lib",
+  "title": "Color focus ring map",
+  "description": "Shared color -> focus-visible:ring-{color}-500 class map.",
+  "files": [
+    {
+      "path": "packages/react/src/lib/color-focus-ring.ts",
+      "type": "registry:lib",
+      "content": "export const colorFocusRingClass = {\n  primary: \"focus-visible:ring-primary-500\",\n  secondary: \"focus-visible:ring-secondary-500\",\n  neutral: \"focus-visible:ring-neutral-500\",\n  success: \"focus-visible:ring-success-500\",\n  warning: \"focus-visible:ring-warning-500\",\n  danger: \"focus-visible:ring-danger-500\",\n  info: \"focus-visible:ring-info-500\",\n} as const;\n"
+    }
+  ]
+}

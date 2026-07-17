@@ -82,7 +82,7 @@ function InputPage() {
           />
           <DemoRow>
             {colors.map((color) => (
-              <div key={color} className="min-w-[10rem] flex-1">
+              <div key={color} className="w-full min-w-0 sm:min-w-[10rem] sm:flex-1">
                 <Input color={color} isInvalid placeholder={color} />
               </div>
             ))}

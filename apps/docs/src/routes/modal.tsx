@@ -36,12 +36,16 @@ function DemoModal({
 } & Omit<ModalProps, 'isOpen' | 'onOpenChange' | 'children'>) {
   return (
     <Modal isOpen={openKey === id} onOpenChange={(open) => !open && onClose()} {...props}>
-      <Modal.Header>
+      <Modal.Header className="px-4 sm:px-6">
         <Modal.Title>{title}</Modal.Title>
         {description ? <Modal.Description>{description}</Modal.Description> : null}
       </Modal.Header>
-      {children != null ? <Modal.Body>{children}</Modal.Body> : null}
-      {footer != null ? <Modal.Footer>{footer}</Modal.Footer> : null}
+      {children != null ? <Modal.Body className="px-4 sm:px-6">{children}</Modal.Body> : null}
+      {footer != null ? (
+        <Modal.Footer className="flex-col-reverse gap-2 px-4 sm:flex-row sm:flex-wrap sm:justify-end sm:px-6 [&>*]:w-full sm:[&>*]:w-auto">
+          {footer}
+        </Modal.Footer>
+      ) : null}
     </Modal>
   )
 }

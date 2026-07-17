@@ -11,7 +11,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        content: 'width=device-width, initial-scale=1, viewport-fit=cover',
       },
       {
         title: 'Avara — Component library',
@@ -35,8 +35,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        <Toaster placement='top-right'  maxVisible={3} />
-        
+        <Toaster placement="top-center" maxVisible={3} />
+
         <Scripts />
       </body>
     </html>

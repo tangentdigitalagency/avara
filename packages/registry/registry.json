@@ -1,0 +1,153 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "avara",
+  "homepage": "https://avara.dev",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:base",
+      "title": "Avara theme",
+      "description": "Design tokens for Bold/Premium themes and the Glass layer. Required by every component.",
+      "files": [
+        {
+          "path": "packages/react/src/styles/theme.css",
+          "type": "registry:file",
+          "target": "~/styles/avara-theme.css"
+        }
+      ]
+    },
+    {
+      "name": "cn",
+      "type": "registry:lib",
+      "title": "cn utility",
+      "description": "clsx + tailwind-merge helper used by every component.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [{ "path": "packages/react/src/lib/cn.ts", "type": "registry:lib" }]
+    },
+    {
+      "name": "color-focus-ring",
+      "type": "registry:lib",
+      "title": "Color focus ring map",
+      "description": "Shared color -> focus-visible:ring-{color}-500 class map.",
+      "files": [{ "path": "packages/react/src/lib/color-focus-ring.ts", "type": "registry:lib" }]
+    },
+    {
+      "name": "slot-class-names",
+      "type": "registry:lib",
+      "title": "SlotClassNames type",
+      "description": "Generic TypeScript type for multi-slot classNames props.",
+      "files": [{ "path": "packages/react/src/lib/slot-class-names.ts", "type": "registry:lib" }]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Action button — solid/outline/soft/ghost variants, 7 colors, loading/icon-only states.",
+      "registryDependencies": ["theme", "cn", "color-focus-ring"],
+      "dependencies": ["@avara/motion", "class-variance-authority", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/button/button.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/button/button.variants.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Text input built on Base UI Field — label, description, error, clearable.",
+      "registryDependencies": ["theme", "cn"],
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/input/input.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/input/input.variants.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Compound composition — Card.Header/Body/Footer/Title/Description/Action, isPressable/isHoverable.",
+      "registryDependencies": ["theme", "cn"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/card/card.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/card/card.variants.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Base UI Dialog — real Motion-driven enter/exit, responsive bottom-sheet on mobile.",
+      "registryDependencies": ["theme", "cn"],
+      "dependencies": ["@base-ui/react", "@avara/motion", "motion", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/modal/modal.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/modal/modal.variants.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Base UI Toast — imperative API, peek-behind stacking, progress bar, promise chaining.",
+      "registryDependencies": ["theme", "cn", "button", "slot-class-names"],
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/toast/toast.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/toast/toast.variants.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Base UI Checkbox — indeterminate, loading, 3 motion styles (pop/wave/stagger).",
+      "registryDependencies": ["theme", "cn", "color-focus-ring", "slot-class-names"],
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/checkbox/checkbox.tsx", "type": "registry:ui" },
+        {
+          "path": "packages/react/src/components/checkbox/checkbox.variants.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Base UI Switch — thumbIcon, startContent/endContent flanking icons.",
+      "registryDependencies": ["theme", "cn", "color-focus-ring", "slot-class-names"],
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/switch/switch.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/switch/switch.variants.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "radio",
+      "type": "registry:ui",
+      "title": "RadioGroup / Radio",
+      "description": "Base UI RadioGroup + Radio — context-based variant inheritance, per-item overrides.",
+      "registryDependencies": ["theme", "cn", "color-focus-ring", "slot-class-names"],
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "files": [
+        { "path": "packages/react/src/components/radio/radio.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/radio/radio.variants.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Base UI Select — single/multi selection, real floating positioning, clearable.",
+      "registryDependencies": ["theme", "cn", "color-focus-ring", "slot-class-names"],
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "files": [
+        { "path": "packages/react/src/components/select/select.tsx", "type": "registry:ui" },
+        { "path": "packages/react/src/components/select/select.variants.ts", "type": "registry:ui" }
+      ]
+    }
+  ]
+}

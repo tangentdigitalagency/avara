@@ -27,17 +27,20 @@ function CheckboxPage() {
       >
         <DemoStack>
           {motions.map((motion) => (
-            <DemoRow key={motion} label={motion}>
-              {colors.map((color) => (
-                <Checkbox
-                  key={color}
-                  motion={motion}
-                  color={color}
-                  label={color}
-                  defaultChecked
-                />
-              ))}
-            </DemoRow>
+            <div key={motion} className="flex flex-col gap-3">
+              <VariantLabel>{motion}</VariantLabel>
+              <DemoGrid>
+                {colors.map((color) => (
+                  <Checkbox
+                    key={color}
+                    motion={motion}
+                    color={color}
+                    label={color}
+                    defaultChecked
+                  />
+                ))}
+              </DemoGrid>
+            </div>
           ))}
         </DemoStack>
       </Section>
