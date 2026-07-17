@@ -22,12 +22,14 @@ async function detectPackageManager(cwd: string): Promise<"pnpm" | "yarn" | "bun
 }
 function resolveTargetPath(file: RegistryFile, cwd: string, itemName: string): string {
   if (file.target) {
-    // "~" means the consumer's project root — matches shadcn's real convention.
     return join(cwd, file.target.replace(/^~\//, ""));
   }
-  // Default: strip the source monorepo prefix, keep just the filename,
-  // group under src/components/ui/<component-name>/.
   const fileName = file.path.split("/").pop()!;
+  if (file.type === "registry:lib") {
+    // Matches the @/lib/* aliases baked into components' rewritten imports.
+    const aliasedName = itemName === "motion" ? "avara-motion" : itemName;
+    return join(cwd, "src", "lib", `${aliasedName}.${fileName.split(".").pop()}`);
+  }
   return join(cwd, "src", "components", "ui", itemName, fileName);
 }
 
@@ -85,5 +87,8 @@ export async function addComponents(names: string[], options: { yes?: boolean } 
     }
   }
 
+  console.log(
+    `\nNote: components use "@/..." import aliases. Make sure your tsconfig/vite config has "@" pointing at your "src" directory.`,
+  );
   console.log(`\nDone. Added: ${items.map((i) => i.name).join(", ")}`);
 }

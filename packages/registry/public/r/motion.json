@@ -1,0 +1,16 @@
+{
+  "name": "motion",
+  "type": "registry:lib",
+  "title": "Motion utilities",
+  "description": "Spring physics, easing, modal animation presets, and reduced-motion/reduced-transparency hooks.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/motion/src/index.ts",
+      "type": "registry:lib",
+      "content": "import { useState, useEffect } from \"react\";\nexport const duration = {\n  fast: 0.12,\n  normal: 0.2,\n  slow: 0.32,\n} as const;\n\nexport const ease = {\n  standard: [0.4, 0, 0.2, 1],\n  in: [0.4, 0, 1, 1],\n  out: [0, 0, 0.2, 1],\n} as const;\n\nexport const spring = {\n  snappy: { type: \"spring\", stiffness: 500, damping: 30, mass: 0.5 },\n} as const;\nexport const modalAnimations = {\n  fade: {\n    initial: { opacity: 0 },\n    animate: { opacity: 1 },\n    exit: { opacity: 0 },\n  },\n  scale: {\n    initial: { opacity: 0, scale: 0.95 },\n    animate: { opacity: 1, scale: 1 },\n    exit: { opacity: 0, scale: 0.95 },\n  },\n  slideUp: {\n    initial: { opacity: 0, y: 24 },\n    animate: { opacity: 1, y: 0 },\n    exit: { opacity: 0, y: 24 },\n  },\n  slideDown: {\n    initial: { opacity: 0, y: -24 },\n    animate: { opacity: 1, y: 0 },\n    exit: { opacity: 0, y: -24 },\n  },\n  slideLeft: {\n    initial: { opacity: 0, x: 24 },\n    animate: { opacity: 1, x: 0 },\n    exit: { opacity: 0, x: 24 },\n  },\n  slideRight: {\n    initial: { opacity: 0, x: -24 },\n    animate: { opacity: 1, x: 0 },\n    exit: { opacity: 0, x: -24 },\n  },\n  none: {\n    initial: {},\n    animate: {},\n    exit: {},\n  },\n} as const;\n\nexport type ModalAnimation = keyof typeof modalAnimations;\n\nfunction getPrefersReducedMotion(): boolean {\n  if (typeof window === \"undefined\" || typeof window.matchMedia !== \"function\") {\n    return false;\n  }\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n}\n\nexport function usePrefersReducedMotion(): boolean {\n  const [prefersReduced, setPrefersReduced] = useState(getPrefersReducedMotion);\n\n  useEffect(() => {\n    if (typeof window === \"undefined\" || typeof window.matchMedia !== \"function\") {\n      return;\n    }\n    const query = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n    const handleChange = (event: MediaQueryListEvent) => setPrefersReduced(event.matches);\n    query.addEventListener(\"change\", handleChange);\n    return () => query.removeEventListener(\"change\", handleChange);\n  }, []);\n\n  return prefersReduced;\n}\n\nexport function usePrefersReducedTransparency(): boolean {\n  const [prefersReduced, setPrefersReduced] = useState(() => {\n    if (typeof window === \"undefined\" || typeof window.matchMedia !== \"function\") return false;\n    return window.matchMedia(\"(prefers-reduced-transparency: reduce)\").matches;\n  });\n\n  useEffect(() => {\n    if (typeof window === \"undefined\" || typeof window.matchMedia !== \"function\") return;\n    const query = window.matchMedia(\"(prefers-reduced-transparency: reduce)\");\n    const handleChange = (event: MediaQueryListEvent) => setPrefersReduced(event.matches);\n    query.addEventListener(\"change\", handleChange);\n    return () => query.removeEventListener(\"change\", handleChange);\n  }, []);\n\n  return prefersReduced;\n}\n"
+    }
+  ]
+}

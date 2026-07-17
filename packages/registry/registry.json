@@ -43,8 +43,8 @@
       "type": "registry:ui",
       "title": "Button",
       "description": "Action button — solid/outline/soft/ghost variants, 7 colors, loading/icon-only states.",
-      "registryDependencies": ["theme", "cn", "color-focus-ring"],
-      "dependencies": ["@avara/motion", "class-variance-authority", "lucide-react"],
+      "registryDependencies": ["theme", "cn", "color-focus-ring", "motion"],
+      "dependencies": ["class-variance-authority", "lucide-react", "motion"],
       "files": [
         { "path": "packages/react/src/components/button/button.tsx", "type": "registry:ui" },
         { "path": "packages/react/src/components/button/button.variants.ts", "type": "registry:ui" }
@@ -55,7 +55,7 @@
       "type": "registry:ui",
       "title": "Input",
       "description": "Text input built on Base UI Field — label, description, error, clearable.",
-      "registryDependencies": ["theme", "cn"],
+      "registryDependencies": ["theme", "cn", "slot-class-names"],
       "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
       "files": [
         { "path": "packages/react/src/components/input/input.tsx", "type": "registry:ui" },
@@ -68,7 +68,7 @@
       "title": "Card",
       "description": "Compound composition — Card.Header/Body/Footer/Title/Description/Action, isPressable/isHoverable.",
       "registryDependencies": ["theme", "cn"],
-      "dependencies": ["class-variance-authority", "lucide-react"],
+      "dependencies": ["class-variance-authority"],
       "files": [
         { "path": "packages/react/src/components/card/card.tsx", "type": "registry:ui" },
         { "path": "packages/react/src/components/card/card.variants.ts", "type": "registry:ui" }
@@ -79,8 +79,8 @@
       "type": "registry:ui",
       "title": "Modal",
       "description": "Base UI Dialog — real Motion-driven enter/exit, responsive bottom-sheet on mobile.",
-      "registryDependencies": ["theme", "cn"],
-      "dependencies": ["@base-ui/react", "@avara/motion", "motion", "lucide-react"],
+      "registryDependencies": ["theme", "cn", "motion", "slot-class-names"],
+      "dependencies": ["@base-ui/react", "motion", "lucide-react"],
       "files": [
         { "path": "packages/react/src/components/modal/modal.tsx", "type": "registry:ui" },
         { "path": "packages/react/src/components/modal/modal.variants.ts", "type": "registry:ui" }
@@ -148,6 +148,14 @@
         { "path": "packages/react/src/components/select/select.tsx", "type": "registry:ui" },
         { "path": "packages/react/src/components/select/select.variants.ts", "type": "registry:ui" }
       ]
+    },
+    {
+      "name": "motion",
+      "type": "registry:lib",
+      "title": "Motion utilities",
+      "description": "Spring physics, easing, modal animation presets, and reduced-motion/reduced-transparency hooks.",
+      "dependencies": ["motion"],
+      "files": [{ "path": "packages/motion/src/index.ts", "type": "registry:lib" }]
     }
   ]
 }

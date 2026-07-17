@@ -30,6 +30,21 @@ interface Registry {
   items: RegistryItem[];
 }
 
+const IMPORT_REWRITES: [RegExp, string][] = [
+  [/from ["']\.\.\/\.\.\/lib\/cn["']/g, 'from "@/lib/cn"'],
+  [/from ["']\.\.\/\.\.\/lib\/slot-class-names["']/g, 'from "@/lib/slot-class-names"'],
+  [/from ["']\.\.\/\.\.\/lib\/color-focus-ring["']/g, 'from "@/lib/color-focus-ring"'],
+  [/from ["']@avara\/motion["']/g, 'from "@/lib/avara-motion"'],
+  [/from ["']\.\.\/button\/button\.variants["']/g, 'from "@/components/ui/button/button-variants"'],
+];
+
+function rewriteImports(content: string): string {
+  return IMPORT_REWRITES.reduce(
+    (acc, [pattern, replacement]) => acc.replace(pattern, replacement),
+    content,
+  );
+}
+
 async function build() {
   const raw = await readFile(REGISTRY_PATH, "utf-8");
   const registry: Registry = JSON.parse(raw);
@@ -40,7 +55,8 @@ async function build() {
     const filesWithContent = await Promise.all(
       item.files.map(async (file) => {
         const absolutePath = join(REPO_ROOT, file.path);
-        const content = await readFile(absolutePath, "utf-8");
+        const rawContent = await readFile(absolutePath, "utf-8");
+        const content = rewriteImports(rawContent);
         return { ...file, content };
       }),
     );
