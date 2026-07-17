@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -36,3 +39,16 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Commit updated registry (main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if ! git diff --quiet -- packages/registry/public/r; then
+            git config user.name "avara-bot"
+            git config user.email "actions@github.com"
+            git add packages/registry/public/r
+            git commit -m "chore: rebuild registry [skip ci]"
+            git push
+          else
+            echo "Registry output unchanged, nothing to commit."
+          fi
