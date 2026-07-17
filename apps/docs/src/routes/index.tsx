@@ -53,6 +53,11 @@ const components = [
     description: 'Single and multi select menus with clearable, placement, and validation.',
     to: '/select' as const,
   },
+  {
+    name: 'Tabs',
+    description: 'Segmented navigation with solid/underline variants, sizes, colors, and panels.',
+    to: '/tabs' as const,
+  },
 ]
 
 function Library() {

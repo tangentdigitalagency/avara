@@ -42,3 +42,15 @@ export type {
   SelectClassNames,
   SelectItemOption,
 } from "./components/select/select";
+
+// Tabs
+export { Tabs } from "./components/tabs/tabs";
+export type {
+  TabsProps,
+  TabsListProps,
+  TabProps,
+  TabPanelProps,
+  TabsColor,
+  TabsVariant,
+  TabsSize,
+} from "./components/tabs/tabs";
