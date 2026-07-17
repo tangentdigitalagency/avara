@@ -5,6 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".output/**", ".next/**", "!.next/cache/**"]
     },
+    "@avara/registry#build": {
+      "outputs": ["public/r/**"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,
