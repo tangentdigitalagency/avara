@@ -8,8 +8,8 @@
   --surface: #ffffff;
   --border: #e2e8f0;
   --muted: #64748b;
-  --primary-500-raw: oklch(0.85 0.22 125);
-  --primary-950-raw: oklch(0.24 0.09 134);
+  --primary-500-raw: oklch(0.563 0.241 260.8);
+  --primary-950-raw: oklch(0.2 0.157 268.8);
 
   --shadow-sm-raw: 0 2px 4px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
   --shadow-md-raw: 0 6px 12px -2px rgb(0 0 0 / 0.12), 0 3px 6px -3px rgb(0 0 0 / 0.08);
@@ -27,33 +27,33 @@
   --shadow-lg-raw: 0 16px 32px -4px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.1);
 }
 
-/* Premium theme — charcoal blue primary, Pumpkin Spice as its own distinct secondary */
+/* Premium theme — graphite (near-neutral, slightly boosted for presence) primary, cognac as its own distinct secondary */
 
 [data-theme="premium"] {
-  --primary-500-raw: oklch(0.335 0.045 238);
-  --primary-950-raw: oklch(0.97 0.01 238);
+  --primary-500-raw: oklch(0.3 0.038 261.7);
+  --primary-950-raw: oklch(0.09 0.044 265.7);
 
-  --color-primary-50: oklch(0.97 0.01 238);
-  --color-primary-100: oklch(0.93 0.015 238);
-  --color-primary-200: oklch(0.85 0.02 238);
-  --color-primary-300: oklch(0.74 0.03 238);
-  --color-primary-400: oklch(0.55 0.04 238);
-  --color-primary-600: oklch(0.28 0.045 238);
-  --color-primary-700: oklch(0.22 0.04 238);
-  --color-primary-800: oklch(0.17 0.035 238);
-  --color-primary-900: oklch(0.13 0.03 238);
+  --color-primary-50: oklch(0.97 0.017 261.7);
+  --color-primary-100: oklch(0.93 0.019 261.7);
+  --color-primary-200: oklch(0.86 0.024 261.7);
+  --color-primary-300: oklch(0.73 0.029 261.7);
+  --color-primary-400: oklch(0.52 0.033 261.7);
+  --color-primary-600: oklch(0.26 0.039 262.6);
+  --color-primary-700: oklch(0.21 0.041 263.5);
+  --color-primary-800: oklch(0.165 0.042 264.4);
+  --color-primary-900: oklch(0.125 0.043 265.3);
 
-  --color-secondary-50: oklch(0.97 0.03 48);
-  --color-secondary-100: oklch(0.93 0.06 48);
-  --color-secondary-200: oklch(0.87 0.1 48);
-  --color-secondary-300: oklch(0.81 0.14 48);
-  --color-secondary-400: oklch(0.77 0.16 48);
-  --color-secondary-500: oklch(0.73 0.18 48);
-  --color-secondary-600: oklch(0.63 0.17 46);
-  --color-secondary-700: oklch(0.53 0.15 44);
-  --color-secondary-800: oklch(0.43 0.13 42);
-  --color-secondary-900: oklch(0.34 0.1 40);
-  --color-secondary-950: oklch(0.24 0.07 38);
+  --color-secondary-50: oklch(0.97 0.031 52.2);
+  --color-secondary-100: oklch(0.93 0.041 52.2);
+  --color-secondary-200: oklch(0.87 0.062 52.2);
+  --color-secondary-300: oklch(0.715 0.083 52.2);
+  --color-secondary-400: oklch(0.631 0.103 52.2);
+  --color-secondary-500: oklch(0.589 0.124 52.2);
+  --color-secondary-600: oklch(0.566 0.116 50.9);
+  --color-secondary-700: oklch(0.519 0.107 49.5);
+  --color-secondary-800: oklch(0.453 0.099 48.2);
+  --color-secondary-900: oklch(0.375 0.091 46.9);
+  --color-secondary-950: oklch(0.2 0.087 46.2);
 }
 
 /* Glass — independent layer, combines with any theme via data-glass + data-theme together */
@@ -98,31 +98,31 @@
   --color-border: var(--border);
   --color-muted: var(--muted);
 
-  /* Primary — Bold's lime by default; Premium theme overrides via [data-theme] above */
-  --color-primary-50: oklch(0.97 0.04 125);
-  --color-primary-100: oklch(0.94 0.08 125);
-  --color-primary-200: oklch(0.89 0.13 125);
-  --color-primary-300: oklch(0.87 0.18 125);
-  --color-primary-400: oklch(0.86 0.21 125);
+  /* Primary — Bold's electric blue by default; Premium theme overrides via [data-theme] above */
+  --color-primary-50: oklch(0.97 0.036 260.8);
+  --color-primary-100: oklch(0.93 0.059 260.8);
+  --color-primary-200: oklch(0.87 0.104 260.8);
+  --color-primary-300: oklch(0.701 0.15 260.8);
+  --color-primary-400: oklch(0.609 0.195 260.8);
   --color-primary-500: var(--primary-500-raw);
-  --color-primary-600: oklch(0.75 0.21 128);
-  --color-primary-700: oklch(0.62 0.19 130);
-  --color-primary-800: oklch(0.48 0.16 132);
-  --color-primary-900: oklch(0.36 0.13 133);
+  --color-primary-600: oklch(0.541 0.222 262.6);
+  --color-primary-700: oklch(0.498 0.204 264.4);
+  --color-primary-800: oklch(0.436 0.185 266.1);
+  --color-primary-900: oklch(0.363 0.166 267.9);
   --color-primary-950: var(--primary-950-raw);
 
-  /* Secondary — neon orange, shared brand accent across every theme */
-  --color-secondary-50: oklch(0.97 0.05 48);
-  --color-secondary-100: oklch(0.93 0.1 48);
-  --color-secondary-200: oklch(0.87 0.16 48);
-  --color-secondary-300: oklch(0.81 0.21 48);
-  --color-secondary-400: oklch(0.76 0.25 48);
-  --color-secondary-500: oklch(0.72 0.27 48);
-  --color-secondary-600: oklch(0.62 0.25 46);
-  --color-secondary-700: oklch(0.52 0.22 44);
-  --color-secondary-800: oklch(0.42 0.18 42);
-  --color-secondary-900: oklch(0.33 0.14 40);
-  --color-secondary-950: oklch(0.22 0.1 38);
+  /* Secondary — tangerine, shared brand accent across every theme */
+  --color-secondary-50: oklch(0.97 0.04 45.1);
+  --color-secondary-100: oklch(0.93 0.058 45.1);
+  --color-secondary-200: oklch(0.87 0.093 45.1);
+  --color-secondary-300: oklch(0.778 0.129 45.1);
+  --color-secondary-400: oklch(0.727 0.164 45.1);
+  --color-secondary-500: oklch(0.702 0.2 45.1);
+  --color-secondary-600: oklch(0.672 0.187 43.8);
+  --color-secondary-700: oklch(0.612 0.173 42.4);
+  --color-secondary-800: oklch(0.526 0.16 41.1);
+  --color-secondary-900: oklch(0.426 0.147 39.8);
+  --color-secondary-950: oklch(0.2 0.14 39.1);
 
   /* Neutral — near-achromatic with a whisper of the primary hue */
   --color-neutral-50: oklch(0.985 0.002 280);
@@ -137,7 +137,7 @@
   --color-neutral-900: oklch(0.15 0.004 280);
   --color-neutral-950: oklch(0.09 0.003 280);
 
-  /* Success — shifted to emerald so it stays distinct from lime primary */
+  /* Success — emerald, stays distinct from both new primaries */
   --color-success-100: oklch(0.93 0.05 165);
   --color-success-200: oklch(0.85 0.08 165);
   --color-success-500: oklch(0.55 0.14 165);
@@ -145,7 +145,7 @@
   --color-success-700: oklch(0.39 0.11 165);
   --color-success-800: oklch(0.32 0.09 165);
 
-  /* Warning — shifted to golden amber so it stays distinct from orange secondary */
+  /* Warning — golden amber, stays distinct from tangerine secondary */
   --color-warning-100: oklch(0.94 0.05 85);
   --color-warning-200: oklch(0.88 0.09 85);
   --color-warning-500: oklch(0.78 0.16 85);
@@ -160,12 +160,13 @@
   --color-danger-700: oklch(0.44 0.18 25);
   --color-danger-800: oklch(0.36 0.15 25);
 
-  --color-info-100: oklch(0.93 0.04 240);
-  --color-info-200: oklch(0.85 0.07 240);
-  --color-info-500: oklch(0.62 0.15 240);
-  --color-info-600: oklch(0.54 0.15 240);
-  --color-info-700: oklch(0.46 0.14 240);
-  --color-info-800: oklch(0.38 0.12 240);
+  /* Info — shifted from hue 240 to 195 (cyan/sky) so it stays visually distinct from the new primary blue at hue 260.8 */
+  --color-info-100: oklch(0.93 0.04 195);
+  --color-info-200: oklch(0.85 0.07 195);
+  --color-info-500: oklch(0.62 0.15 195);
+  --color-info-600: oklch(0.54 0.15 195);
+  --color-info-700: oklch(0.46 0.14 195);
+  --color-info-800: oklch(0.38 0.12 195);
 
   /* Radius — bumped up for the bubbly, chunky direction */
   --radius-sm: 8px;
